@@ -1,221 +1,224 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Props extends CollectionEntry<'blog'>['data'] {
+	id: string;
+}
 
-const { title, description, pubDate, updatedDate, heroImage, category, rating, status, readLink, readSite, author, tags } = Astro.props;
+const { id, title, description, pubDate, updatedDate, categories = [], author, ogImage } = Astro.props;
+
+// Fetch all posts to determine related, prev and next posts
+const allPosts = await getCollection('blog');
+
+// Sort posts chronologically (latest first)
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Find prev & next posts
+const currentIndex = sortedPosts.findIndex((p) => p.id === id);
+const nextPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+const prevPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
+// Find related posts (up to 10)
+const relatedPosts = sortedPosts
+	.filter((p) => p.id !== id)
+	.map((p) => {
+		const matchCount = p.data.categories ? p.data.categories.filter((cat) => categories.includes(cat)).length : 0;
+		return { post: p, matchCount };
+	})
+	.sort((a, b) => {
+		if (b.matchCount !== a.matchCount) {
+			return b.matchCount - a.matchCount; // Prioritize category match
+		}
+		return b.post.data.pubDate.valueOf() - a.post.data.pubDate.valueOf(); // Fallback to chronological
+	})
+	.slice(0, 10)
+	.map((item) => item.post);
 ---
 
 <html lang="vi">
 	<head>
-		<BaseHead title={`${title} - Review Truyện Tranh MangaK`} description={description} />
-		<style>
-			.post-container {
-				width: 100%;
-				max-width: 800px;
-				margin: 0 auto;
-				padding: 2rem 1rem;
-			}
-			.post-header {
-				margin-bottom: 2.5rem;
-				text-align: center;
-			}
-			.category-wrapper {
-				margin-bottom: 1rem;
-			}
-			.post-title {
-				font-size: 2.5rem;
-				font-weight: 800;
-				color: var(--text-primary);
-				line-height: 1.25;
-				margin-bottom: 1.25rem;
-			}
-			
-			/* Metadata Box */
-			.metadata-box {
-				display: grid;
-				grid-template-columns: repeat(2, 1fr);
-				gap: 1rem;
-				background-color: var(--card-bg);
-				border: 1px solid var(--border-color);
-				border-radius: 12px;
-				padding: 1.25rem;
-				margin-bottom: 2rem;
-				text-align: left;
-				box-shadow: var(--card-shadow);
-			}
-			.metadata-item {
-				display: flex;
-				flex-direction: column;
-				gap: 0.25rem;
-			}
-			.metadata-label {
-				font-size: 0.8rem;
-				text-transform: uppercase;
-				color: var(--text-muted);
-				font-weight: 600;
-				font-family: var(--font-title);
-				letter-spacing: 0.05em;
-			}
-			.metadata-value {
-				font-weight: 600;
-				color: var(--text-primary);
-				font-size: 0.95rem;
-			}
-			.rating-value {
-				color: #fbbf24; /* Yellow star */
-				display: flex;
-				align-items: center;
-				gap: 0.25rem;
-			}
-
-			/* Banner Image */
-			.hero-image-container {
-				width: 100%;
-				margin-bottom: 2.5rem;
-				border-radius: 16px;
-				overflow: hidden;
-				box-shadow: var(--card-shadow);
-				background: linear-gradient(135deg, #1f2937, #111827);
-				aspect-ratio: 16/9;
-			}
-			.hero-image-img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-
-			/* Prose content styling */
-			.prose {
-				color: var(--text-secondary);
-				line-height: 1.8;
-				font-size: 1.1rem;
-			}
-			.prose :global(h2), .prose :global(h3) {
-				color: var(--text-primary);
-				margin-top: 2rem;
-				margin-bottom: 1rem;
-			}
-			.prose :global(p) {
-				margin-bottom: 1.5rem;
-			}
-			.prose :global(ul), .prose :global(ol) {
-				margin-bottom: 1.5rem;
-				padding-left: 1.5rem;
-			}
-			.prose :global(li) {
-				margin-bottom: 0.5rem;
-			}
-			.prose :global(strong) {
-				color: var(--text-primary);
-			}
-			.prose :global(blockquote) {
-				border-left: 4px solid var(--accent);
-				background-color: var(--card-bg);
-				padding: 1rem 1.5rem;
-				border-radius: 0 8px 8px 0;
-				margin: 1.5rem 0;
-				font-style: italic;
-				color: var(--text-primary);
-			}
-
-			/* Call to Action Backlink */
-			.cta-box {
-				background: var(--hero-bg);
-				border: 1px solid var(--border-color);
-				border-radius: 12px;
-				padding: 1.5rem;
-				text-align: center;
-				margin: 2.5rem 0;
-			}
-			.cta-text {
-				font-weight: 500;
-				margin-bottom: 1rem;
-				color: var(--text-primary);
-			}
-			.cta-box .btn {
-				width: 100%;
-				max-width: 320px;
-			}
-
-			@media (max-width: 640px) {
-				.post-title {
-					font-size: 1.8rem;
+		<BaseHead title={`${title} - Review Truyện Tranh MangaK`} description={description} image={ogImage} />
+		<!-- JSON-LD Breadcrumb Schema -->
+		<script type="application/ld+json" is:inline set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Trang chủ",
+					"item": "https://mangak.io.vn"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": "Bài viết",
+					"item": "https://mangak.io.vn/blog"
+				},
+				{
+					"@type": "ListItem",
+					"position": 3,
+					"name": title,
+					"item": `https://mangak.io.vn/blog/${id}/`
 				}
-				.metadata-box {
-					grid-template-columns: 1fr;
+			]
+		})} />
+
+		<!-- JSON-LD BlogPosting Schema -->
+		<script type="application/ld+json" is:inline set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "BlogPosting",
+			"headline": title,
+			"description": description,
+			"image": ogImage || "https://cdn.khaizinam.io.vn/blog-folder/2026-05/og-banner.jpg",
+			"datePublished": pubDate.toISOString(),
+			"dateModified": updatedDate ? updatedDate.toISOString() : pubDate.toISOString(),
+			"author": {
+				"@type": "Person",
+				"name": author
+			},
+			"publisher": {
+				"@type": "Organization",
+				"name": "MangaK",
+				"logo": {
+					"@type": "ImageObject",
+					"url": "https://mangak.io.vn/logo.png"
 				}
+			},
+			"mainEntityOfPage": {
+				"@type": "WebPage",
+				"@id": `https://mangak.io.vn/blog/${id}/`
 			}
-		</style>
+		})} />
 	</head>
 
 	<body>
 		<Header />
 		<main>
-			<article class="post-container">
-				<div class="post-header">
-					<div class="category-wrapper">
-						<span class={`badge badge-${category}`}>{category}</span>
-					</div>
-					<h1 class="post-title">{title}</h1>
-					
-					<!-- Metadata grid -->
-					<div class="metadata-box">
-						<div class="metadata-item">
-							<span class="metadata-label">Ngày xuất bản</span>
-							<span class="metadata-value"><FormattedDate date={pubDate} /></span>
+			<article class="w-full max-w-[800px] mx-auto py-10 px-4">
+				<!-- Breadcrumbs -->
+				<nav aria-label="Breadcrumb" class="mb-8 text-[0.85rem] text-text-muted font-medium flex items-center gap-2">
+					<a href="/" class="hover:text-accent transition-colors" title="Trang chủ MangaK">Trang chủ</a>
+					<span class="text-border-color">/</span>
+					<a href="/blog" class="hover:text-accent transition-colors" title="Xem tất cả bài viết review">Bài viết</a>
+					<span class="text-border-color">/</span>
+					<span class="text-text-primary font-semibold line-clamp-1">{title}</span>
+				</nav>
+
+				<div class="mb-12 text-center border-b border-border-color pb-8">
+					<h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-text-primary leading-tight mb-5 font-title">
+						{title}
+					</h1>
+					<div class="text-[0.95rem] text-text-muted font-title font-medium flex flex-col items-center gap-2">
+						<!-- Row 1: Author & Publish Date -->
+						<div class="flex flex-wrap items-center justify-center gap-2">
+							<span>Tác giả: <strong class="text-text-primary font-bold">{author}</strong></span>
+							<span>•</span>
+							<span>Viết ngày <FormattedDate date={pubDate} /></span>
+							{updatedDate && (
+								<>
+									<span>•</span>
+									<span>Cập nhật ngày <FormattedDate date={updatedDate} /></span>
+								</>
+							)}
 						</div>
-						<div class="metadata-item">
-							<span class="metadata-label">Đánh giá</span>
-							<span class="metadata-value rating-value">
-								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-									<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+						
+						<!-- Row 2: Categories -->
+						{categories && categories.length > 0 && (
+							<div class="flex flex-wrap items-center justify-center gap-1.5 mt-0.5">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
 								</svg>
-								{rating}
-							</span>
-						</div>
-						<div class="metadata-item">
-							<span class="metadata-label">Tình trạng truyện</span>
-							<span class="metadata-value">{status}</span>
-						</div>
-						<div class="metadata-item">
-							<span class="metadata-label">Người viết</span>
-							<span class="metadata-value">{author}</span>
-						</div>
+								<span>Thể loại:</span>
+								<div class="flex flex-wrap items-center gap-1">
+									{categories.map((cat, idx) => (
+										<Fragment key={cat}><a href={`/category/${cat.toLowerCase()}/`} class="hover:text-accent underline transition-colors">{cat}</a>{idx < categories.length - 1 && <span>,&nbsp;</span>}</Fragment>
+									))}
+								</div>
+							</div>
+						)}
 					</div>
 				</div>
 
-				{heroImage && (
-					<div class="hero-image-container">
-						<img class="hero-image-img" src={heroImage} alt={title} />
-					</div>
-				)}
-
-				<!-- Top CTA link (Backlink) -->
-				<div class="cta-box">
-					<p class="cta-text">🔥 Muốn đọc ngay bộ truyện này với chất lượng dịch tốt nhất?</p>
-					<a href={readLink} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-						Đọc Ngay Tại {readSite} &rarr;
-					</a>
-				</div>
-
-				<div class="prose">
+				<div class="text-text-secondary leading-relaxed text-lg [&_h2]:text-text-primary [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:font-title [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-text-primary [&_h3]:mt-10 [&_h3]:mb-4 [&_h3]:font-title [&_h3]:text-xl [&_h3]:font-bold [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-2 [&_strong]:text-text-primary [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:bg-card-bg [&_blockquote]:px-6 [&_blockquote]:py-4 [&_blockquote]:rounded-r-lg [&_blockquote]:my-6 [&_blockquote]:italic [&_blockquote]:text-text-primary [&_a]:underline [&_a]:font-semibold [&_a]:text-accent hover:[&_a]:text-accent-hover [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse [&_table]:border [&_table]:border-border-color [&_th]:bg-bg-secondary [&_th]:border [&_th]:border-border-color [&_th]:px-4 [&_th]:py-2.5 [&_th]:text-left [&_th]:font-bold [&_th]:text-text-primary [&_td]:border [&_td]:border-border-color [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-text-secondary [&_tr:nth-child(even)]:bg-bg-primary/30 font-body">
 					<slot />
 				</div>
 
-				<!-- Bottom CTA link (Backlink) -->
-				<div class="cta-box">
-					<p class="cta-text">Cảm ơn bạn đã đọc bài review của MangaK. Bấm vào link dưới đây để tới trang đọc bản dịch nhé!</p>
-					<a href={readLink} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-						Đến Trang Đọc Truyện &rarr;
-					</a>
-				</div>
+				<!-- Navigation: Prev & Next Posts -->
+				{(prevPost || nextPost) && (
+					<div class="border-t border-border-color mt-12 pt-8 flex flex-col sm:flex-row justify-between gap-4 font-title">
+						{prevPost ? (
+							<a href={`/blog/${prevPost.id}/`} class="flex-1 border border-border-color hover:border-accent p-4 rounded-xl transition-all duration-300 group no-underline text-left">
+								<span class="text-xs text-text-muted uppercase tracking-wider block mb-1">&larr; Bài trước</span>
+								<span class="text-base font-bold text-text-primary group-hover:text-accent transition-colors line-clamp-1">{prevPost.data.title}</span>
+							</a>
+						) : (
+							<div class="flex-1 hidden sm:block" />
+						)}
+						
+						{nextPost ? (
+							<a href={`/blog/${nextPost.id}/`} class="flex-1 border border-border-color hover:border-accent p-4 rounded-xl transition-all duration-300 group no-underline text-right">
+								<span class="text-xs text-text-muted uppercase tracking-wider block mb-1">Bài tiếp theo &rarr;</span>
+								<span class="text-base font-bold text-text-primary group-hover:text-accent transition-colors line-clamp-1">{nextPost.data.title}</span>
+							</a>
+						) : (
+							<div class="flex-1 hidden sm:block" />
+						)}
+					</div>
+				)}
+
+				<!-- Related Posts Section (Up to 10) -->
+				{relatedPosts.length > 0 && (
+					<div class="border-t border-border-color mt-12 pt-8">
+						<h3 class="text-xl font-bold font-title text-text-primary mb-6 flex items-center gap-2">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9.5a2.5 2.5 0 00-2.5-2.5H14" />
+							</svg>
+							Bài viết liên quan
+						</h3>
+						<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+							{relatedPosts.map((p) => (
+								<a href={`/blog/${p.id}/`} class="border border-border-color hover:border-accent p-4 rounded-xl transition-all duration-300 group no-underline flex flex-col justify-between">
+									<div>
+										<div class="flex flex-wrap gap-1.5 mb-2 text-[0.75rem] font-semibold font-title">
+											{p.data.categories.map((cat, idx) => (
+												<span class="text-accent uppercase tracking-wider">{cat}{idx < p.data.categories.length - 1 && <span class="text-text-muted">&nbsp;•&nbsp;</span>}</span>
+											))}
+										</div>
+										<h4 class="text-sm sm:text-[0.95rem] font-bold text-text-primary group-hover:text-accent transition-colors line-clamp-2 leading-snug mb-1.5 font-title">
+											{p.data.title}
+										</h4>
+										<p class="text-[0.8rem] text-text-muted line-clamp-2 mb-3 leading-relaxed font-body">
+											{p.data.description}
+										</p>
+									</div>
+									<span class="text-[0.75rem] text-text-muted mt-2 font-body block border-t border-border-color/40 pt-2">
+										{p.data.author} • <FormattedDate date={p.data.pubDate} />
+									</span>
+								</a>
+							))}
+						</div>
+					</div>
+				)}
 			</article>
 		</main>
 		<Footer />
+		<script is:inline>
+			// Automatically open all external links in a new tab
+			document.addEventListener('DOMContentLoaded', () => {
+				const links = document.querySelectorAll('article a');
+				links.forEach(link => {
+					const href = link.getAttribute('href');
+					if (href && (href.startsWith('http://') || href.startsWith('https://')) && !href.includes(window.location.hostname)) {
+						link.setAttribute('target', '_blank');
+						link.setAttribute('rel', 'noopener noreferrer');
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

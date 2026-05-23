@@ -2,71 +2,25 @@
 const today = new Date();
 ---
 
-<footer>
-	<div class="footer-container">
-		<div class="footer-brand">
-			<span class="logo-manga">Manga</span><span class="logo-k">K</span>
+<footer class="bg-footer-bg border-t border-border-color py-10 px-6 text-text-secondary transition-all duration-300">
+	<div class="max-w-[1200px] mx-auto flex flex-col gap-8">
+		<!-- Top Row: Logo & Description -->
+		<div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
+			<div class="flex items-center">
+				<img src="/logo.png" alt="MangaK Logo - Kênh review truyện tranh Manga, Manhua, Manhwa" class="h-10 w-auto block" />
+			</div>
+			<p class="max-w-[500px] text-center md:text-right text-[0.95rem] text-text-muted leading-relaxed font-body">
+				Kênh đánh giá, review truyện tranh Manga, Manhua, Manhwa. Nơi kết nối niềm đam mê đọc truyện.
+			</p>
 		</div>
-		<p class="footer-desc">
-			Kênh đánh giá, review truyện tranh Manga, Manhua, Manhwa hàng đầu Việt Nam. Nơi kết nối niềm đam mê đọc truyện và dẫn link đến các web đọc truyện uy tín, tốc độ cao.
-		</p>
-		<hr class="footer-divider" />
-		<div class="footer-bottom">
+
+		<!-- Divider -->
+		<hr class="border-0 border-t border-border-color" />
+
+		<!-- Bottom Row: Copyright & Disclaimer -->
+		<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[0.85rem] text-text-muted font-body">
 			<p>&copy; {today.getFullYear()} MangaK (mangak.io.vn). All rights reserved.</p>
-			<p class="disclaimer">Tất cả thông tin và đánh giá thuộc bản quyền của MangaK Team. Chúng tôi dẫn link tới các trang đọc để làm backlinks hỗ trợ cộng đồng.</p>
+			<p class="text-[0.75rem] max-w-[800px] text-center md:text-right">Tất cả thông tin và đánh giá thuộc bản quyền của MangaK Team.</p>
 		</div>
 	</div>
 </footer>
-
-<style>
-	footer {
-		background-color: var(--footer-bg);
-		border-top: 1px solid var(--border-color);
-		padding: 3rem 1.5rem;
-		color: var(--text-secondary);
-		transition: background-color 0.3s ease, border-color 0.3s ease;
-	}
-	.footer-container {
-		max-width: 1200px;
-		margin: 0 auto;
-		text-align: center;
-	}
-	.footer-brand {
-		font-family: var(--font-title);
-		font-size: 1.8rem;
-		font-weight: 800;
-		margin-bottom: 1rem;
-	}
-	.logo-manga {
-		color: var(--text-primary);
-	}
-	.logo-k {
-		color: var(--accent);
-		background: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-	.footer-desc {
-		max-width: 600px;
-		margin: 0 auto 2rem auto;
-		font-size: 0.95rem;
-		color: var(--text-muted);
-	}
-	.footer-divider {
-		border: 0;
-		border-top: 1px solid var(--border-color);
-		margin-bottom: 2rem;
-	}
-	.footer-bottom {
-		font-size: 0.85rem;
-		color: var(--text-muted);
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
-	}
-	.disclaimer {
-		font-size: 0.75rem;
-		max-width: 800px;
-		margin: 0 auto;
-	}
-</style>

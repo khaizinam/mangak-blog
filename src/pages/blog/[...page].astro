@@ -1,0 +1,112 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const posts = (await getCollection('blog')).sort(
+		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+	);
+	return paginate(posts, { pageSize: 20 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title={`Danh Sách Bài Review Truyện Tranh - Trang ${page.currentPage} - MangaK`} description="Danh sách các bài viết review, đánh giá chi tiết các bộ truyện tranh hot nhất: Manga, Manhua, Manhwa." />
+		<script type="application/ld+json" is:inline set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [
+				{
+					"@type": "ListItem",
+					"position": 1,
+					"name": "Trang chủ",
+					"item": "https://mangak.io.vn"
+				},
+				{
+					"@type": "ListItem",
+					"position": 2,
+					"name": `Bài viết (Trang ${page.currentPage})`,
+					"item": `https://mangak.io.vn/blog/${page.currentPage > 1 ? page.currentPage : ''}`
+				}
+			]
+		})} />
+	</head>
+	<body>
+		<Header />
+		<main class="pt-8 pb-20 px-6 max-w-[1200px] mx-auto">
+			<!-- Breadcrumbs -->
+			<nav aria-label="Breadcrumb" class="mb-8 text-[0.85rem] text-text-muted font-medium flex items-center gap-2 max-w-[800px] mx-auto">
+				<a href="/" class="hover:text-accent transition-colors" title="Trang chủ MangaK">Trang chủ</a>
+				<span class="text-border-color">/</span>
+				<span class="text-text-primary font-semibold">Bài viết (Trang {page.currentPage})</span>
+			</nav>
+
+			<section class="text-center mb-16">
+				<h1 class="text-4xl sm:text-5xl font-extrabold mb-4 font-title text-text-primary">Kho Bài Review Truyện Tranh</h1>
+				<p class="text-[1.1rem] text-text-secondary max-w-[600px] mx-auto leading-relaxed">Danh sách đầy đủ các bài phân tích cốt truyện, tâm lý nhân vật và nghệ thuật đồ họa của các tựa manga, manhua, manhwa nổi bật.</p>
+			</section>
+
+			<section>
+				<div class="flex flex-col gap-6 max-w-[800px] mx-auto">
+					{
+						page.data.map((post) => (
+							<a href={`/blog/${post.id}/`} class="no-underline text-inherit block group" title={`Đọc bài review chi tiết: ${post.data.title}`}>
+								<article class="bg-card-bg border border-border-color rounded-xl p-6 sm:p-7 shadow-card-shadow flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg">
+									<div class="flex items-center justify-between mb-3 text-[0.8rem] font-semibold font-title">
+										<div class="flex gap-2">
+											{post.data.categories.map((cat) => (
+												<span class={`uppercase tracking-wider text-${cat.toLowerCase()}`}>
+													{cat}
+												</span>
+											))}
+										</div>
+										<div class="flex items-center gap-2 text-text-muted">
+											<span class="text-text-primary font-medium">{post.data.author}</span>
+											<span class="text-border-color">•</span>
+											<span class="text-text-muted">
+												<FormattedDate date={post.data.pubDate} />
+											</span>
+										</div>
+									</div>
+									
+									<h3 class="text-[1.3rem] sm:text-[1.4rem] font-bold mb-2 leading-snug text-text-primary group-hover:text-accent transition-colors duration-200 font-title">
+										{post.data.title}
+									</h3>
+									<p class="text-[0.95rem] text-text-secondary leading-relaxed font-body">
+										{post.data.description}
+									</p>
+								</article>
+							</a>
+						))
+					}
+				</div>
+
+				<!-- Pagination Controls -->
+				{ (page.url.prev || page.url.next) && (
+					<nav class="flex justify-between items-center mt-12 max-w-[800px] mx-auto font-title">
+						{page.url.prev ? (
+							<a href={page.url.prev} class="inline-flex items-center justify-center px-4 py-2 border-2 border-border-color hover:bg-border-color text-text-primary font-semibold text-[0.9rem] rounded-lg transition-colors no-underline" title="Xem các bài viết ở trang trước">&larr; Trang Trước</a>
+						) : (
+							<div />
+						)}
+						<span class="font-semibold text-text-muted">Trang {page.currentPage} / {page.lastPage}</span>
+						{page.url.next ? (
+							<a href={page.url.next} class="inline-flex items-center justify-center px-4 py-2 border-2 border-border-color hover:bg-border-color text-text-primary font-semibold text-[0.9rem] rounded-lg transition-colors no-underline" title="Xem các bài viết ở trang sau">Trang Sau &rarr;</a>
+						) : (
+							<div />
+						)}
+					</nav>
+				)}
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

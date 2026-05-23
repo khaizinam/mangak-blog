@@ -2,13 +2,8 @@
 title: "Review Solo Leveling: Cơn Sốt Đỉnh Cao Của Dòng Manhwa Hành Động"
 description: "Solo Leveling (Tôi Thăng Cấp Một Mình) đã vẽ nên một thế giới thợ săn kịch tính với phần đồ họa đỉnh cao, tạo nên cột mốc lịch sử cho ngành truyện tranh Hàn Quốc."
 pubDate: "2026-05-23"
-heroImage: "/images/solo_leveling.jpg"
-category: "manhwa"
-rating: "9.5/10"
-status: "Đã hoàn thành"
-readLink: "https://mangak.site/manhwa/solo-leveling"
-readSite: "MangaK"
-tags: ["Solo Leveling", "Manhwa", "Chugong", "Hành Động", "Hệ Thống"]
+categories: ["manhwa"]
+author: "MangaK Team"
 ---
 
 **Solo Leveling** (Tôi Thăng Cấp Một Mình) là bộ manhwa chuyển thể từ web tiểu thuyết cùng tên của tác giả Chugong. Với nét vẽ đỉnh cao của cố họa sĩ Jang Sung-rak (Dubu - Redice Studio), tác phẩm đã đưa truyện tranh Hàn Quốc vươn tầm thế giới.
@@ -39,8 +34,4 @@ Sung Jin-Woo, nhân vật chính, ban đầu được mệnh danh là "Thợ să
 
 Solo Leveling là bộ truyện bắt buộc phải đọc nếu bạn yêu thích thể loại hành động nhập vai, hệ thống thăng cấp. Dù cốt truyện không quá phức tạp hay nhiều tầng ý nghĩa như các bộ manga cổ điển, nhưng sự mãn nhãn về phần nhìn và cảm giác hưng phấn mà nó mang lại là không thể bàn cãi.
 
-*   **Điểm số:** 9.5 / 10
-*   **Thể loại phù hợp:** Những người đam mê game RPG, hành động nghẹt thở, và fan của nét vẽ kỹ thuật số hiện đại.
-
----
-> **Link đọc bản dịch chất lượng cao:** [Đọc Solo Leveling tại MangaK]({readLink}) để chứng kiến hành trình thống trị của Chúa Tể Bóng Tối!
+Độc giả có thể tìm đọc toàn bộ các chương của bộ truyện tranh [Solo Leveling](https://mangak.site/manhwa/solo-leveling) đầy đủ bản dịch sắc nét tại cổng thông tin [MangaK](https://mangak.site).

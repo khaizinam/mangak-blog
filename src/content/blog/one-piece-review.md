@@ -2,13 +2,8 @@
 title: "Review One Piece: Hành Trình Kỳ Diệu Đi Tìm Kho Báu Vua Hải Tặc"
 description: "One Piece của Eiichiro Oda không chỉ là một bộ manga phiêu lưu thông thường, mà là một sử thi đồ sộ về tình bạn, ý chí tự do và ước mơ lớn lao."
 pubDate: "2026-05-23"
-heroImage: "/images/one_piece.jpg"
-category: "manga"
-rating: "9.8/10"
-status: "Đang tiến hành"
-readLink: "https://mangak.site/manga/one-piece"
-readSite: "MangaK"
-tags: ["One Piece", "Manga", "Eiichiro Oda", "Shounen", "Phiêu lưu"]
+categories: ["manga"]
+author: "MangaK Team"
 ---
 
 **One Piece** (Vua Hải Tặc) là bộ manga huyền thoại của tác giả Eiichiro Oda, ra mắt lần đầu tiên vào năm 1997 và cho đến nay vẫn giữ vững ngôi vương là bộ truyện tranh bán chạy nhất mọi thời đại.
@@ -39,8 +34,4 @@ Các nhân vật phản diện hay đồng minh cũng được xây dựng rất
 
 One Piece là một kiệt tác bắt buộc phải đọc đối với bất kỳ tín đồ manga nào. Sự kết hợp giữa cuộc phiêu lưu kịch tính, sự hài hước và chiều sâu triết lý xã hội đã tạo nên sức hút bất tận suốt gần 3 thập kỷ.
 
-*   **Điểm số:** 9.8 / 10
-*   **Thể loại phù hợp:** Mọi lứa tuổi, những người yêu thích phiêu lưu, hành động và cốt truyện có chiều sâu.
-
----
-> **Link đọc bản dịch chất lượng cao:** [Đọc One Piece tại MangaK]({readLink}) để theo dõi hành trình của Luffy và băng Mũ Rơm với tốc độ cập nhật nhanh nhất!
+Hiện nay, bạn có thể theo dõi bản dịch đầy đủ và chất lượng cao của bộ truyện tranh [One Piece](https://mangak.site/manga/one-piece) cực kỳ nhanh chóng trên website [MangaK](https://mangak.site) để không bỏ lỡ bất cứ tình tiết hấp dẫn nào của Luffy và đồng đội.
