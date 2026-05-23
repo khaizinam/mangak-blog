@@ -97,3 +97,85 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background: var(--text-muted);
 }
+
+/* ==========================================================================
+   Post Content Styles (Markdown / MDX rendering)
+   ========================================================================== */
+
+/* Image style for markdown posts */
+.post-content img {
+	max-width: 100%;
+	height: auto;
+	display: block;
+	margin: 2rem auto;
+	border-radius: 0.75rem;
+	box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+
+/* Center caption elements immediately following an image */
+.post-content img + em,
+.post-content img + p > em {
+	display: block;
+	text-align: center;
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	margin-top: -1.5rem;
+	margin-bottom: 2rem;
+}
+
+/* Table styling for responsive mobile scroll and sizes */
+.post-content table {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border-collapse: collapse;
+	margin: 2rem 0;
+	border: 1px solid var(--border-color);
+	font-size: 13px; /* Mobile font size */
+}
+
+@media (min-width: 640px) {
+	.post-content table {
+		display: table;
+		font-size: 0.95rem; /* Desktop font size */
+	}
+}
+
+.post-content th {
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border-color);
+	padding: 0.5rem 0.75rem; /* Mobile padding */
+	text-align: left;
+	font-weight: 700;
+	color: var(--text-primary);
+	white-space: nowrap; /* Prevent heading wrapping on mobile */
+}
+
+@media (min-width: 640px) {
+	.post-content th {
+		padding: 0.75rem 1rem; /* Desktop padding */
+		white-space: normal;
+	}
+}
+
+.post-content td {
+	border: 1px solid var(--border-color);
+	padding: 0.5rem 0.75rem; /* Mobile padding */
+	color: var(--text-secondary);
+}
+
+@media (min-width: 640px) {
+	.post-content td {
+		padding: 0.75rem 1rem; /* Desktop padding */
+	}
+}
+
+.post-content tr:nth-child(even) {
+	background-color: rgba(15, 23, 42, 0.02);
+}
+
+html[data-theme="dark"] .post-content tr:nth-child(even) {
+	background-color: rgba(255, 255, 255, 0.03);
+}
