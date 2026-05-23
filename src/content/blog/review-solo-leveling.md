@@ -1,7 +1,7 @@
 ---
 title: "Review Solo Leveling: Cơn Sốt Đỉnh Cao Của Dòng Manhwa Hành Động"
 description: "Solo Leveling (Tôi Thăng Cấp Một Mình) đã vẽ nên một thế giới thợ săn kịch tính với phần đồ họa đỉnh cao, tạo nên cột mốc lịch sử cho ngành truyện tranh Hàn Quốc."
-pubDate: "2026-05-23"
+pubDate: "2026-05-23 11:00:00"
 categories: ["manhwa"]
 author: "MangaK Team"
 ---

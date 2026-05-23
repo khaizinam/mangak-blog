@@ -1,7 +1,7 @@
 ---
 title: "Review One Piece: Hành Trình Kỳ Diệu Đi Tìm Kho Báu Vua Hải Tặc"
 description: "One Piece của Eiichiro Oda không chỉ là một bộ manga phiêu lưu thông thường, mà là một sử thi đồ sộ về tình bạn, ý chí tự do và ước mơ lớn lao."
-pubDate: "2026-05-23"
+pubDate: "2026-05-23 10:00:00"
 categories: ["manga"]
 author: "MangaK Team"
 ---

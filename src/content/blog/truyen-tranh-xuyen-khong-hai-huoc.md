@@ -1,7 +1,7 @@
 ---
 title: "15 Bộ Truyện Tranh Xuyên Không Hài Hước Hay Nhất"
 description: "Truyện tranh xuyên không hài hước thường thu hút nhiều độc giả bởi sự kết hợp các yếu tố giải trí và tạo được tiếng cười."
-pubDate: "2026-05-23"
+pubDate: "2026-05-23 14:00:00"
 categories: ["News"]
 author: "MangaK Team"
 ---

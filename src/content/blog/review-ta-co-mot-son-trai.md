@@ -1,7 +1,7 @@
 ---
 title: "Review Truyện Tranh: Ta Có Một Sơn Trại"
 description: "Nếu bạn là một tín đồ yêu thích thể loại truyện tranh có yếu tố xuyên không và hài hước, thì &quot;Ta Có Một Sơn Trại&quot; chắc chắn sẽ là một tác phẩm không thể bỏ qua. Với nội dung phong phú và phong cách vẽ đặc sắc…"
-pubDate: "2026-05-23"
+pubDate: "2026-05-23 12:00:00"
 categories: ["manhua","xuyenkhong"]
 author: "MangaK Team"
 ogImage: "https://cdn.khaizinam.io.vn/mangak-blog/ta-co-mot-son-trai-1.jpg"

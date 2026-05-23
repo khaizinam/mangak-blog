@@ -1,7 +1,7 @@
 ---
 title: "Đạo Quỷ Dị Tiên (Hỏa Vượng) — Tổng quan & Review"
 description: "WIKI &quot;Đạo Quỷ Dị Tiên&quot; (道诡异仙 - Dao Gui Yi Xian - Deviant Immortal of Uncanny Dao) là một bộ tiểu thuyết mạng thể loại huyền huyễn phương Đông được đăng tải"
-pubDate: "2026-05-23"
+pubDate: "2026-05-23 13:00:00"
 categories: ["manhua","huyenhuyen", "linhdi"]
 author: "MangaK Team"
 ogImage: "https://cdn.khaizinam.io.vn/mangak-blog/dao-quy-di-tien-hoa-vuong-thuvienanime-thumb.jpg"
