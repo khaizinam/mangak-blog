@@ -1,0 +1,348 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const mangaCount = posts.filter(p => p.data.category === 'manga').length;
+const manhuaCount = posts.filter(p => p.data.category === 'manhua').length;
+const manhwaCount = posts.filter(p => p.data.category === 'manhwa').length;
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title="MangaK - Cổng Review Truyện Manga, Manhua, Manhwa" description="MangaK (mangak.io.vn) chuyên cung cấp bài review đánh giá truyện tranh manga, manhua, manhwa chi tiết, chính xác và dẫn link đọc truyện bản dịch chất lượng cao." />
+		<style>
+			/* Grid Layout */
+			.home-main {
+				padding-top: 3rem;
+				padding-bottom: 5rem;
+			}
+			.categories-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1.5rem;
+				margin-bottom: 4rem;
+			}
+			.category-card {
+				background-color: var(--card-bg);
+				border: 1px solid var(--border-color);
+				border-radius: 12px;
+				padding: 2rem;
+				text-align: center;
+				box-shadow: var(--card-shadow);
+				transition: all 0.3s ease;
+				position: relative;
+				overflow: hidden;
+			}
+			.category-card:hover {
+				transform: translateY(-5px);
+				border-color: var(--accent);
+			}
+			.category-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 4px;
+				height: 100%;
+			}
+			.category-card.manga::before { background-color: var(--color-manga); }
+			.category-card.manhua::before { background-color: var(--color-manhua); }
+			.category-card.manhwa::before { background-color: var(--color-manhwa); }
+
+			.cat-title {
+				font-size: 1.5rem;
+				margin-bottom: 0.5rem;
+			}
+			.cat-count {
+				font-size: 0.9rem;
+				color: var(--text-muted);
+				font-weight: 500;
+			}
+
+			.section-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 2rem;
+				border-left: 4px solid var(--accent);
+				padding-left: 1rem;
+			}
+			.section-title {
+				font-size: 1.8rem;
+				font-weight: 800;
+			}
+			.view-all-link {
+				font-weight: 600;
+				font-family: var(--font-title);
+				font-size: 0.95rem;
+			}
+
+			/* Reviews Grid */
+			.reviews-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+				gap: 2rem;
+			}
+			.review-card {
+				background-color: var(--card-bg);
+				border: 1px solid var(--border-color);
+				border-radius: 16px;
+				overflow: hidden;
+				box-shadow: var(--card-shadow);
+				display: flex;
+				flex-direction: column;
+				transition: all 0.3s ease;
+			}
+			.review-card:hover {
+				transform: translateY(-6px);
+				box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
+				border-color: var(--accent);
+			}
+			.card-image-wrapper {
+				position: relative;
+				height: 200px;
+				background: linear-gradient(135deg, #1f2937, #111827);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+			}
+			.card-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.5s ease;
+			}
+			.review-card:hover .card-image {
+				transform: scale(1.05);
+			}
+			.card-badge {
+				position: absolute;
+				top: 1rem;
+				left: 1rem;
+				z-index: 10;
+			}
+			.card-rating {
+				position: absolute;
+				bottom: 1rem;
+				right: 1rem;
+				background-color: rgba(15, 23, 42, 0.85);
+				backdrop-filter: blur(4px);
+				color: #fbbf24; /* Amber star color */
+				font-weight: 700;
+				font-size: 0.85rem;
+				padding: 0.25rem 0.6rem;
+				border-radius: 6px;
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+				border: 1px solid rgba(251, 191, 36, 0.3);
+			}
+			.card-body {
+				padding: 1.5rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+			.card-title {
+				font-size: 1.25rem;
+				margin-bottom: 0.75rem;
+				line-height: 1.4;
+				height: 3.5rem;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			.card-title a {
+				color: var(--text-primary);
+				text-decoration: none;
+			}
+			.card-title a:hover {
+				color: var(--accent);
+			}
+			.card-desc {
+				font-size: 0.9rem;
+				color: var(--text-secondary);
+				margin-bottom: 1.5rem;
+				height: 4rem;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+			}
+			.card-meta {
+				margin-top: auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: 0.8rem;
+				color: var(--text-muted);
+				border-top: 1px solid var(--border-color);
+				padding-top: 1rem;
+			}
+			.card-actions {
+				display: flex;
+				gap: 0.5rem;
+				margin-top: 1.25rem;
+			}
+			.card-actions .btn {
+				flex: 1;
+				font-size: 0.85rem;
+				padding: 0.6rem;
+			}
+
+			/* SEO Backlink Hub Section */
+			.backlink-hub {
+				background-color: var(--card-bg);
+				border: 1px solid var(--border-color);
+				border-radius: 16px;
+				padding: 3rem 2rem;
+				margin-top: 5rem;
+				box-shadow: var(--card-shadow);
+				text-align: center;
+			}
+			.hub-title {
+				font-size: 2rem;
+				margin-bottom: 1rem;
+			}
+			.hub-desc {
+				max-width: 800px;
+				margin: 0 auto 2rem auto;
+				color: var(--text-secondary);
+			}
+			.partners-list {
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 1rem;
+			}
+
+			@media (max-width: 768px) {
+				.categories-grid {
+					grid-template-columns: 1fr;
+					gap: 1rem;
+					margin-bottom: 2.5rem;
+				}
+				.reviews-grid {
+					grid-template-columns: 1fr;
+				}
+				.backlink-hub {
+					padding: 2rem 1.5rem;
+					margin-top: 3.5rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		
+		<div class="hero-wrapper">
+			<div class="main">
+				<h1 class="hero-title">Đánh Giá & Kết Nối Đọc Truyện</h1>
+				<p class="hero-subtitle">
+					Trang tin review truyện tranh Manga, Manhua, Manhwa uy tín hàng đầu. Tìm kiếm đánh giá sâu sắc và nhận link đọc tốc độ cao nhất tại <strong>MangaK</strong>.
+				</p>
+				<div>
+					<a href="/blog" class="btn btn-primary">Khám Phá Bài Review</a>
+				</div>
+			</div>
+		</div>
+
+		<main class="home-main">
+			<!-- Categories Info cards -->
+			<section class="categories-grid">
+				<div class="category-card manga">
+					<h3 class="cat-title">Manga Review</h3>
+					<p class="cat-count">{mangaCount} bài viết đánh giá truyện Nhật Bản</p>
+				</div>
+				<div class="category-card manhua">
+					<h3 class="cat-title">Manhua Review</h3>
+					<p class="cat-count">{manhuaCount} bài viết đánh giá truyện Trung Quốc</p>
+				</div>
+				<div class="category-card manhwa">
+					<h3 class="cat-title">Manhwa Review</h3>
+					<p class="cat-count">{manhwaCount} bài viết đánh giá truyện Hàn Quốc</p>
+				</div>
+			</section>
+
+			<!-- Recent reviews section -->
+			<section>
+				<div class="section-header">
+					<h2 class="section-title">Bài Đánh Giá Mới Nhất</h2>
+					<a href="/blog" class="view-all-link">Xem tất cả &rarr;</a>
+				</div>
+
+				<div class="reviews-grid">
+					{
+						sortedPosts.map((post) => (
+							<article class="review-card">
+								<div class="card-image-wrapper">
+									<span class={`card-badge badge badge-${post.data.category}`}>
+										{post.data.category}
+									</span>
+									<span class="card-rating">
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+											<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+										</svg>
+										{post.data.rating}
+									</span>
+									{post.data.heroImage ? (
+										<img class="card-image" src={post.data.heroImage} alt={post.data.title} />
+									) : (
+										<div class="card-image-placeholder" style={`background: var(--hero-bg); width:100%; height:100%;`}></div>
+									)}
+								</div>
+								
+								<div class="card-body">
+									<h3 class="card-title">
+										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+									</h3>
+									<p class="card-desc">{post.data.description}</p>
+									
+									<div class="card-meta">
+										<span>Tác giả: {post.data.author}</span>
+										<span>Tình trạng: {post.data.status}</span>
+									</div>
+									
+									<div class="card-actions">
+										<a href={`/blog/${post.id}/`} class="btn btn-outline">
+											Đọc Review
+										</a>
+										<a href={post.data.readLink} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+											Đọc Truyện ({post.data.readSite})
+										</a>
+									</div>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</section>
+
+			<!-- Backlink & SEO description section -->
+			<section class="backlink-hub">
+				<h2 class="hub-title">Liên Kết & Đối Tác Trụ Cột</h2>
+				<p class="hub-desc">
+					MangaK tự hào làm cầu nối liên kết độc giả đến các cổng đọc truyện tranh việt hóa uy tín như MangaDex, NetTruyen, CuuTruyen, và nhiều dịch giả độc lập khác. Chúng tôi hỗ trợ thúc đẩy backlinks chất lượng cho cộng đồng truyện tranh Việt Nam.
+				</p>
+				<div class="partners-list">
+					<a href="https://mangak.site" target="_blank" rel="noopener" class="btn btn-outline">MangaK Portal</a>
+					<a href="https://mangadex.org" target="_blank" rel="noopener" class="btn btn-outline">MangaDex</a>
+					<a href="https://cuutruyen.net" target="_blank" rel="noopener" class="btn btn-outline">Cửu Truyện</a>
+				</div>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>

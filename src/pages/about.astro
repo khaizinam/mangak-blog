@@ -1,0 +1,99 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title="Giới Thiệu Về MangaK - Cổng Đánh Giá Truyện Tranh" description="MangaK là chuyên trang đánh giá và review truyện tranh Manga, Manhua, Manhwa chuyên nghiệp, đồng thời là cổng liên kết trụ cột kết nối độc giả đến các website dịch truyện uy tín." />
+		<style>
+			.about-main {
+				padding-top: 3rem;
+				padding-bottom: 5rem;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+			.about-header {
+				text-align: center;
+				margin-bottom: 3rem;
+			}
+			.about-title {
+				font-size: 2.5rem;
+				font-weight: 800;
+				margin-bottom: 1rem;
+			}
+			.about-subtitle {
+				font-size: 1.1rem;
+				color: var(--text-secondary);
+			}
+			.about-content {
+				line-height: 1.8;
+				font-size: 1.1rem;
+				color: var(--text-secondary);
+			}
+			.about-content h2 {
+				color: var(--text-primary);
+				margin-top: 2.5rem;
+				margin-bottom: 1rem;
+				font-size: 1.6rem;
+			}
+			.about-content p {
+				margin-bottom: 1.5rem;
+			}
+			.about-content ul {
+				margin-bottom: 1.5rem;
+				padding-left: 1.5rem;
+			}
+			.about-content li {
+				margin-bottom: 0.5rem;
+			}
+			.highlight-box {
+				background: var(--hero-bg);
+				border: 1px solid var(--border-color);
+				border-radius: 12px;
+				padding: 1.5rem;
+				margin: 2rem 0;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="about-main">
+			<section class="about-header">
+				<h1 class="about-title">Về MangaK</h1>
+				<p class="about-subtitle">Cổng kết nối đam mê và đánh giá truyện tranh hàng đầu Việt Nam</p>
+			</section>
+
+			<section class="about-content">
+				<p>
+					Chào mừng bạn đến với <strong>MangaK</strong> (địa chỉ chính thức: <strong>mangak.io.vn</strong>). Chúng tôi là một trang blog độc lập được thành lập bởi những người yêu thích truyện tranh với mục tiêu mang lại những bài viết đánh giá khách quan, chi tiết nhất về các tác phẩm Manga (Nhật Bản), Manhua (Trung Quốc) và Manhwa (Hàn Quốc).
+				</p>
+
+				<div class="highlight-box">
+					<h3>Sứ mệnh của chúng tôi</h3>
+					<p style="margin-bottom: 0; margin-top: 0.5rem;">
+						MangaK không trực tiếp đăng tải hoặc phát hành truyện tranh bản dịch. Sứ mệnh của chúng tôi là trở thành một <strong>bộ lọc chất lượng</strong> giúp độc giả tìm kiếm được những tác phẩm hay nhất, đồng thời đóng vai trò làm <strong>trụ backlinks chất lượng</strong> kết nối trực tiếp độc giả tới các cổng dịch và đọc truyện uy tín tại Việt Nam.
+					</p>
+				</div>
+
+				<h2>Tại sao nên theo dõi MangaK?</h2>
+				<ul>
+					<li><strong>Đánh giá đa chiều:</strong> Các bài review của chúng tôi phân tích chi tiết từ cốt truyện, chiều sâu tâm lý nhân vật cho tới phong cách thiết kế mỹ thuật và chất lượng đổ màu của các bộ Webtoon/Manhwa hiện đại.</li>
+					<li><strong>Thang điểm rõ ràng:</strong> Giúp bạn dễ dàng quyết định xem có nên dành thời gian cày cuốc một bộ truyện kéo dài hàng trăm chương hay không.</li>
+					<li><strong>Liên kết nhanh chóng:</strong> Mỗi bài viết đều đi kèm đường dẫn trực tiếp tới các nhóm dịch, website đọc truyện gốc uy tín với tốc độ tải trang nhanh và ít quảng cáo khó chịu nhất.</li>
+				</ul>
+
+				<h2>Hợp tác và Liên kết</h2>
+				<p>
+					Nếu bạn là một nhóm dịch tự do, hoặc là đại diện của một website đọc truyện tranh muốn hợp tác trao đổi banner, liên kết backlinks hoặc yêu cầu viết bài review về một bộ truyện mới xuất bản, vui lòng liên hệ với chúng tôi qua email hoặc trang cộng đồng chính thức tại <strong>mangak.io.vn</strong>.
+				</p>
+				<p>
+					Hãy cùng chung tay xây dựng cộng đồng người đọc truyện tranh văn minh, ủng hộ các dịch giả và duy trì đam mê bất tận với thế giới truyện tranh!
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,222 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title="Danh Sách Bài Review Truyện Tranh - MangaK" description="Tổng hợp toàn bộ các bài viết đánh giá, review chi tiết các bộ truyện tranh hot nhất: Manga, Manhua, Manhwa." />
+		<style>
+			.blog-main {
+				padding-top: 3rem;
+				padding-bottom: 5rem;
+			}
+			.page-header {
+				text-align: center;
+				margin-bottom: 4rem;
+			}
+			.page-title {
+				font-size: 2.5rem;
+				font-weight: 800;
+				margin-bottom: 1rem;
+			}
+			.page-desc {
+				font-size: 1.1rem;
+				color: var(--text-secondary);
+				max-width: 600px;
+				margin: 0 auto;
+			}
+
+			/* Grid */
+			.reviews-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+				gap: 2.5rem;
+			}
+			.review-card {
+				background-color: var(--card-bg);
+				border: 1px solid var(--border-color);
+				border-radius: 16px;
+				overflow: hidden;
+				box-shadow: var(--card-shadow);
+				display: flex;
+				flex-direction: column;
+				transition: all 0.3s ease;
+			}
+			.review-card:hover {
+				transform: translateY(-6px);
+				box-shadow: 0 15px 30px -10px rgba(0,0,0,0.15);
+				border-color: var(--accent);
+			}
+			.card-image-wrapper {
+				position: relative;
+				height: 220px;
+				background: linear-gradient(135deg, #1f2937, #111827);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+			}
+			.card-image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.5s ease;
+			}
+			.review-card:hover .card-image {
+				transform: scale(1.05);
+			}
+			.card-badge {
+				position: absolute;
+				top: 1rem;
+				left: 1rem;
+				z-index: 10;
+			}
+			.card-rating {
+				position: absolute;
+				bottom: 1rem;
+				right: 1rem;
+				background-color: rgba(15, 23, 42, 0.85);
+				backdrop-filter: blur(4px);
+				color: #fbbf24;
+				font-weight: 700;
+				font-size: 0.85rem;
+				padding: 0.25rem 0.6rem;
+				border-radius: 6px;
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+				border: 1px solid rgba(251, 191, 36, 0.3);
+			}
+			.card-body {
+				padding: 1.75rem;
+				display: flex;
+				flex-direction: column;
+				flex-grow: 1;
+			}
+			.card-title {
+				font-size: 1.35rem;
+				margin-bottom: 0.75rem;
+				line-height: 1.4;
+				height: 3.8rem;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+			}
+			.card-title a {
+				color: var(--text-primary);
+				text-decoration: none;
+			}
+			.card-title a:hover {
+				color: var(--accent);
+			}
+			.card-desc {
+				font-size: 0.95rem;
+				color: var(--text-secondary);
+				margin-bottom: 1.5rem;
+				height: 4.2rem;
+				overflow: hidden;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+			}
+			.card-meta {
+				margin-top: auto;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				font-size: 0.85rem;
+				color: var(--text-muted);
+				border-top: 1px solid var(--border-color);
+				padding-top: 1rem;
+			}
+			.card-actions {
+				display: flex;
+				gap: 0.5rem;
+				margin-top: 1.25rem;
+			}
+			.card-actions .btn {
+				flex: 1;
+				font-size: 0.85rem;
+				padding: 0.65rem;
+			}
+			
+			@media (max-width: 640px) {
+				.page-title {
+					font-size: 2rem;
+				}
+				.reviews-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="blog-main">
+			<section class="page-header">
+				<h1 class="page-title">Kho Bài Review Truyện Tranh</h1>
+				<p class="page-desc">Tìm kiếm đánh giá khách quan về cốt truyện, hình ảnh và chiều sâu của các tựa manga, manhua, manhwa nổi bật.</p>
+			</section>
+
+			<section>
+				<div class="reviews-grid">
+					{
+						posts.map((post) => (
+							<article class="review-card">
+								<div class="card-image-wrapper">
+									<span class={`card-badge badge badge-${post.data.category}`}>
+										{post.data.category}
+									</span>
+									<span class="card-rating">
+										<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+											<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+										</svg>
+										{post.data.rating}
+									</span>
+									{post.data.heroImage ? (
+										<img class="card-image" src={post.data.heroImage} alt={post.data.title} />
+									) : (
+										<div class="card-image-placeholder" style={`background: var(--hero-bg); width:100%; height:100%;`}></div>
+									)}
+								</div>
+								
+								<div class="card-body">
+									<h3 class="card-title">
+										<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+									</h3>
+									<p class="card-desc">{post.data.description}</p>
+									
+									<div class="card-meta">
+										<span>Tình trạng: {post.data.status}</span>
+										<span>Ngày: <FormattedDate date={post.data.pubDate} /></span>
+									</div>
+									
+									<div class="card-actions">
+										<a href={`/blog/${post.id}/`} class="btn btn-outline">
+											Đọc Review
+										</a>
+										<a href={post.data.readLink} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+											Đọc Truyện ({post.data.readSite})
+										</a>
+									</div>
+								</div>
+							</article>
+						))
+					}
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,115 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="glass">
+	<nav>
+		<div class="nav-brand">
+			<a href="/">
+				<span class="logo-manga">Manga</span><span class="logo-k">K</span>
+			</a>
+			<span class="domain-tag">mangak.io.vn</span>
+		</div>
+		<div class="internal-links">
+			<HeaderLink href="/">Trang Chủ</HeaderLink>
+			<HeaderLink href="/blog">Bài Review</HeaderLink>
+			<HeaderLink href="/about">Giới Thiệu</HeaderLink>
+		</div>
+		<div class="nav-actions">
+			<ThemeToggle />
+		</div>
+	</nav>
+</header>
+
+<style>
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		margin: 0;
+		padding: 0 1.5rem;
+		border-bottom: 1px solid var(--border-color);
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+	nav {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		max-width: 1200px;
+		margin: 0 auto;
+		height: 4.5rem;
+	}
+	.nav-brand {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+	}
+	.nav-brand a {
+		font-family: var(--font-title);
+		font-size: 1.5rem;
+		font-weight: 800;
+		letter-spacing: -0.025em;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+	}
+	.logo-manga {
+		color: var(--text-primary);
+	}
+	.logo-k {
+		color: var(--accent);
+		background: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+	.domain-tag {
+		font-size: 0.75rem;
+		font-weight: 500;
+		color: var(--text-muted);
+		background-color: var(--border-color);
+		padding: 0.15rem 0.4rem;
+		border-radius: 4px;
+		font-family: var(--font-title);
+	}
+	.internal-links {
+		display: flex;
+		gap: 0.5rem;
+	}
+	.internal-links a {
+		padding: 0.5rem 1rem;
+		color: var(--text-secondary);
+		border-radius: 6px;
+		font-weight: 500;
+		font-family: var(--font-title);
+		font-size: 0.95rem;
+		text-decoration: none;
+		border: 1px solid transparent;
+		transition: all 0.2s ease;
+	}
+	.internal-links a:hover {
+		color: var(--accent);
+		background-color: var(--color-manga-bg);
+	}
+	.internal-links a.active {
+		color: var(--accent);
+		background-color: var(--color-manga-bg);
+		border-color: rgba(244, 63, 94, 0.15);
+	}
+	.nav-actions {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	@media (max-width: 640px) {
+		.domain-tag {
+			display: none;
+		}
+		.internal-links a {
+			padding: 0.4rem 0.6rem;
+			font-size: 0.85rem;
+		}
+	}
+</style>
