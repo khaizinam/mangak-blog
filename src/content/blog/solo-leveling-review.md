@@ -34,4 +34,4 @@ Sung Jin-Woo, nhân vật chính, ban đầu được mệnh danh là "Thợ să
 
 Solo Leveling là bộ truyện bắt buộc phải đọc nếu bạn yêu thích thể loại hành động nhập vai, hệ thống thăng cấp. Dù cốt truyện không quá phức tạp hay nhiều tầng ý nghĩa như các bộ manga cổ điển, nhưng sự mãn nhãn về phần nhìn và cảm giác hưng phấn mà nó mang lại là không thể bàn cãi.
 
-Độc giả có thể tìm đọc toàn bộ các chương của bộ truyện tranh [Solo Leveling](https://mangak.site/manhwa/solo-leveling) đầy đủ bản dịch sắc nét tại cổng thông tin [MangaK](https://mangak.site).
+Độc giả có thể tìm đọc toàn bộ các chương của bộ truyện tranh [Tôi Thăng Cấp Một Mình - Solo Leveling | MangaK](https://mangak.site/story/toi-thang-cap-mot-minh) đầy đủ bản dịch sắc nét tại cổng thông tin [MangaK](https://mangak.site).

@@ -34,4 +34,4 @@ Các nhân vật phản diện hay đồng minh cũng được xây dựng rất
 
 One Piece là một kiệt tác bắt buộc phải đọc đối với bất kỳ tín đồ manga nào. Sự kết hợp giữa cuộc phiêu lưu kịch tính, sự hài hước và chiều sâu triết lý xã hội đã tạo nên sức hút bất tận suốt gần 3 thập kỷ.
 
-Hiện nay, bạn có thể theo dõi bản dịch đầy đủ và chất lượng cao của bộ truyện tranh [One Piece](https://mangak.site/manga/one-piece) cực kỳ nhanh chóng trên website [MangaK](https://mangak.site) để không bỏ lỡ bất cứ tình tiết hấp dẫn nào của Luffy và đồng đội.
+Hiện nay, bạn có thể theo dõi bản dịch đầy đủ và chất lượng cao của bộ truyện tranh [ Đảo Hải Tặc - One Piece | MangaK ](https://mangak.site/story/dao-hai-tac) cực kỳ nhanh chóng trên website [MangaK](https://mangak.site) để không bỏ lỡ bất cứ tình tiết hấp dẫn nào của Luffy và đồng đội.
