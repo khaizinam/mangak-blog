@@ -1,0 +1,90 @@
+---
+import { shareLinks } from '../../astro-paper.config';
+
+interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = '' } = Astro.props;
+
+// Get current page URL
+const shareUrl = encodeURIComponent(Astro.url.href);
+const shareTitle = encodeURIComponent(title);
+const shareDesc = encodeURIComponent(description);
+
+// Helper to get brand colors and hover classes
+const getPlatformClasses = (name: string) => {
+	switch (name.toLowerCase()) {
+		case 'facebook':
+			return 'text-text-secondary hover:bg-[#1877F2] hover:text-white border-border-color hover:border-[#1877F2]';
+		case 'x':
+			return 'text-text-secondary hover:bg-black hover:text-white border-border-color hover:border-black';
+		case 'telegram':
+			return 'text-text-secondary hover:bg-[#26A5E4] hover:text-white border-border-color hover:border-[#26A5E4]';
+		case 'whatsapp':
+			return 'text-text-secondary hover:bg-[#25D366] hover:text-white border-border-color hover:border-[#25D366]';
+		case 'pinterest':
+			return 'text-text-secondary hover:bg-[#BD081C] hover:text-white border-border-color hover:border-[#BD081C]';
+		default:
+			return 'text-text-secondary hover:bg-accent hover:text-white border-border-color hover:border-accent';
+	}
+};
+---
+
+<div class="share-buttons-container my-8 p-4 md:p-6 bg-card-bg border border-border-color/60 rounded-2xl shadow-sm flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+	<div class="flex items-center gap-2">
+		<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M8.684 10.742l4.63-2.316a3 3 0 110 5.148l-4.63-2.316a3 3 0 110-2.518z" />
+		</svg>
+		<span class="font-title font-bold text-text-primary text-sm sm:text-base">Chia sẻ bài viết này:</span>
+	</div>
+	
+	<div class="flex flex-wrap items-center gap-2">
+		{shareLinks.map(platform => {
+			let finalUrl = `${platform.url}${shareUrl}`;
+			if (platform.name.toLowerCase() === 'pinterest') {
+				finalUrl += `&description=${shareTitle}`;
+			} else if (platform.name.toLowerCase() === 'whatsapp') {
+				finalUrl = `${platform.url}${shareTitle}%20${shareUrl}`;
+			}
+			
+			return (
+				<a
+					href={finalUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					class={`flex items-center justify-center w-10 h-10 rounded-xl border transition-all duration-300 transform hover:-translate-y-1 hover:shadow-md ${getPlatformClasses(platform.name)}`}
+					title={`Chia sẻ lên ${platform.name}`}
+					aria-label={`Chia sẻ lên ${platform.name}`}
+				>
+					{platform.name.toLowerCase() === 'facebook' && (
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.8c4.56-.93 8-4.96 8-9.8z"/>
+						</svg>
+					)}
+					{platform.name.toLowerCase() === 'x' && (
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+						</svg>
+					)}
+					{platform.name.toLowerCase() === 'telegram' && (
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-4.5 w-4.5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.7-2.48 2.75-2.7.01-.03.01-.15-.06-.21-.07-.06-.17-.04-.25-.02-.11.02-1.78 1.13-5.05 3.34-.48.33-.91.49-1.3.48-.43-.01-1.26-.24-1.88-.45-.76-.25-1.37-.39-1.32-.83.03-.23.35-.47.97-.73 3.8-1.65 6.34-2.74 7.62-3.27 3.62-1.5 4.38-1.76 4.87-1.77.11 0 .35.03.5.15.13.1.17.24.18.34z"/>
+						</svg>
+					)}
+					{platform.name.toLowerCase() === 'whatsapp' && (
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.37 9.864-9.799.002-2.63-1.023-5.101-2.885-6.968C16.63 2.012 14.16 1.02 11.532 1.02c-5.442 0-9.87 4.372-9.874 9.802-.001 1.774.485 3.5 1.407 5.013l-.993 3.624 3.75-.975zm12.383-7.464c-.3-.15-1.777-.875-2.05-.974-.275-.098-.475-.148-.675.15-.2.3-.775.974-.95 1.174-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.792-1.49-1.77-1.665-2.07-.175-.3-.018-.462.13-.61.135-.133.3-.35.45-.525.15-.175.2-.3.3-.5s.05-.375-.025-.525C10.744 6.47 10.144 5 9.894 4.394c-.244-.589-.49-.51-.675-.52-.175-.007-.375-.01-.575-.01-.2 0-.525.075-.8 375-.275.3-1.05 1.024-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.11 3.224 5.112 4.521.714.308 1.272.493 1.707.63.715.227 1.365.195 1.88.118.574-.085 1.778-.726 2.027-1.427.25-.7.25-1.3.175-1.425-.076-.127-.276-.201-.576-.351z"/>
+						</svg>
+					)}
+					{platform.name.toLowerCase() === 'pinterest' && (
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.41 7.61 11.162-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.966 1.406-5.966s-.359-.72-.359-1.781c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738.098.119.112.224.083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.631-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146 1.124.347 2.317.535 3.554.535 6.622 0 11.988-5.366 11.988-11.987C23.999 5.368 18.636 0 12.017 0z"/>
+						</svg>
+					)}
+				</a>
+			)
+		})}
+	</div>
+</div>
