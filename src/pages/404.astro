@@ -1,0 +1,120 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title="404 - Không Tìm Thấy Trang | MangaK" description="Trang bạn tìm kiếm không tồn tại hoặc đã bị thay đổi trên MangaK." />
+		<script is:inline>
+			// Instant client-side redirect for old story pages to the reading domain
+			const path = window.location.pathname;
+			if (path.startsWith('/story/')) {
+				window.location.replace('https://mangak.site' + path);
+			}
+		</script>
+	</head>
+	<body class="bg-bg-primary text-text-primary min-h-screen flex flex-col">
+		<Header />
+		
+		<main class="flex-grow flex items-center justify-center py-16 px-6 relative overflow-hidden">
+			<!-- Decorative Background Blobs -->
+			<div class="absolute top-1/4 left-1/10 w-72 h-72 bg-accent/5 rounded-full filter blur-3xl pointer-events-none"></div>
+			<div class="absolute bottom-1/4 right-1/10 w-96 h-96 bg-blue-500/5 rounded-full filter blur-3xl pointer-events-none"></div>
+
+			<div class="max-w-[700px] w-full bg-card-bg border border-border-color/80 rounded-2xl p-8 sm:p-12 shadow-card-shadow relative z-10 text-center backdrop-blur-sm transition-all duration-300 hover:border-accent/30">
+				
+				<!-- Animated Illustration -->
+				<div class="relative w-48 h-48 mx-auto mb-8">
+					<!-- Concentric Glowing Rings -->
+					<div class="absolute inset-0 border-2 border-dashed border-accent/20 rounded-full animate-[spin_30s_linear_infinite]"></div>
+					<div class="absolute inset-4 border border-dashed border-text-muted/30 rounded-full animate-[spin_15s_linear_infinite_reverse]"></div>
+					
+					<!-- Portal Inner Glow -->
+					<div class="absolute inset-8 bg-gradient-to-tr from-accent/10 to-pink-500/10 rounded-full blur-md animate-pulse"></div>
+
+					<!-- Floating Book / 404 SVG -->
+					<svg xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 m-auto h-24 w-24 text-accent drop-shadow-[0_0_15px_rgba(244,63,94,0.4)] animate-[bounce_3s_ease-in-out_infinite]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.25">
+						<!-- Custom Open Book Icon -->
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+						<!-- Cross Sign over the book -->
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5" stroke="currentColor" stroke-width="1.75" />
+					</svg>
+				</div>
+
+				<!-- Error Status -->
+				<span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-bold font-title tracking-wider uppercase bg-accent/10 text-accent mb-4">
+					Lỗi đường dẫn
+				</span>
+
+				<!-- Giant 404 with Gradient -->
+				<h1 class="text-6xl sm:text-7xl font-black font-title tracking-tight mb-2 bg-gradient-to-r from-accent via-pink-500 to-purple-600 bg-clip-text text-transparent">
+					404
+				</h1>
+
+				<!-- Subtitle -->
+				<h2 class="text-xl sm:text-2xl font-bold font-title text-text-primary mb-4">
+					Bạn đã lạc vào vùng hư vô...
+				</h2>
+
+				<!-- Description -->
+				<p class="text-[0.98rem] sm:text-[1.05rem] text-text-secondary mb-8 leading-relaxed font-body max-w-[550px] mx-auto">
+					Trang bạn tìm kiếm không tồn tại, đã bị đổi tên hoặc gỡ bỏ khỏi hệ thống. Hãy để MangaK dẫn bạn quay trở lại thế giới truyện tranh sống động.
+				</p>
+
+				<!-- Action Buttons -->
+				<div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+					<a 
+						href="/" 
+						class="inline-flex items-center justify-center px-7 py-3 bg-gradient-to-r from-accent to-pink-500 hover:from-accent-hover hover:to-pink-600 text-white font-semibold rounded-xl shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg no-underline font-title text-[0.95rem]"
+						title="Quay về trang chủ MangaK"
+					>
+						Quay về Trang Chủ
+					</a>
+					<a 
+						href="/blog" 
+						class="inline-flex items-center justify-center px-7 py-3 border border-border-color hover:border-accent text-text-primary hover:text-accent font-semibold rounded-xl bg-bg-secondary hover:bg-manga-bg/20 transition-all duration-300 hover:-translate-y-0.5 no-underline font-title text-[0.95rem]"
+						title="Xem tất cả bài review truyện tranh"
+					>
+						Khám Phá Bài Review
+					</a>
+				</div>
+
+				<!-- Quick Navigation Links -->
+				<div class="border-t border-border-color/60 pt-6">
+					<p class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-3 font-title">
+						Truy cập nhanh danh mục
+					</p>
+					<div class="flex flex-wrap justify-center gap-2">
+						<a 
+							href="/category/manga" 
+							class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-bg-primary border border-border-color hover:border-accent/40 text-text-secondary hover:text-accent transition-colors no-underline uppercase tracking-wide font-title"
+							title="Chuyên mục Manga"
+						>
+							Manga
+						</a>
+						<a 
+							href="/category/manhua" 
+							class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-bg-primary border border-border-color hover:border-accent/40 text-text-secondary hover:text-accent transition-colors no-underline uppercase tracking-wide font-title"
+							title="Chuyên mục Manhua"
+						>
+							Manhua
+						</a>
+						<a 
+							href="/category/manhwa" 
+							class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-bg-primary border border-border-color hover:border-accent/40 text-text-secondary hover:text-accent transition-colors no-underline uppercase tracking-wide font-title"
+							title="Chuyên mục Manhwa"
+						>
+							Manhwa
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</main>
+
+		<Footer />
+	</body>
+</html>
