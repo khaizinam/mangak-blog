@@ -4,9 +4,14 @@ description: "WIKI &quot;Đạo Quỷ Dị Tiên&quot; (道诡异仙 - Dao Gui Y
 pubDate: "2026-05-23"
 categories: ["manhua","huyenhuyen", "linhdi"]
 author: "MangaK Team"
+ogImage: "https://cdn.khaizinam.io.vn/mangak-blog/dao-quy-di-tien-hoa-vuong-thuvienanime-thumb.jpg"
 ---
 
 ## 1. Thông tin cơ bản
+
+![Đạo Quỷ Dị Tiên (Hỏa Vượng) | Tổng quan và đánh giá](https://cdn.khaizinam.io.vn/mangak-blog/dao-quy-di-tien-hoa-vuong-thuvienanime-thumb.jpg)
+
+Đạo Quỷ Dị Tiên (Hỏa Vượng) | Tổng quan và đánh giá
 
 ### Nguyên tác tiểu thuyết
 
@@ -42,6 +47,10 @@ Lý Hỏa Vượng — một bệnh nhân tâm thần ở thế giới hiện đ
 
 - **Thế giới Đại Na**: bối cảnh cổ đại huyền huyễn, đầy tà túy, Tư Mệnh và các môn phái kỳ dị.
 - **Thế giới hiện đại**: anh bị coi là người mắc bệnh tâm thần, không ai tin những gì anh trải qua là thật.
+
+![Giới thiệu của Đạo Quỷ Dị Tiên - Thư Viện Anime ](https://cdn.khaizinam.io.vn/mangak-blog/dao-quy-di-tien-hoa-vuong-thuvienanime-1.jpg)
+
+Giới thiệu của Đạo Quỷ Dị Tiên - Thư Viện Anime
 
 Điều khiến câu chuyện đặc biệt: ranh giới giữa **thật và giả**, **tỉnh táo và điên loạn** liên tục bị xóa nhòa. Lý Hỏa Vượng vừa chiến đấu sinh tồn, vừa không thể phân biệt được bản thân đang ở thế giới nào — và đâu mới là thực tại.
 
