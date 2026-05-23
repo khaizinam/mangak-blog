@@ -1,0 +1,23 @@
+# MangaK Blog
+
+> Blog cá nhân đam mê ngành truyện tranh tự tổng hợp, chia sẻ thông tin và đánh giá từ nhiều nguồn.
+
+## Mục đích (Purpose)
+MangaK (mangak.io.vn) được thành lập bởi một cá nhân đam mê truyện tranh để chia sẻ các bài viết phân tích cốt truyện, đánh giá và tổng hợp thông tin từ nhiều nguồn uy tín về các tác phẩm truyện tranh nổi tiếng. Chúng tôi mong muốn mang lại góc nhìn đa chiều giúp bạn đọc tìm kiếm các tác phẩm phù hợp với sở thích.
+
+## Sứ mệnh & Vai trò (Mission & Role)
+- **Tổng hợp & Bộ lọc**: MangaK không trực tiếp đăng tải hoặc phát hành truyện tranh bản dịch. Chúng tôi đóng vai trò là một trang tổng hợp độc lập giúp độc giả có cái nhìn tổng quan về các tác phẩm truyện tranh đáng chú ý.
+- **Cổng liên kết**: Đóng vai trò kết nối độc giả tới các website đọc truyện, nhóm dịch gốc uy tín tại Việt Nam (ví dụ: mangak.site).
+
+## Danh mục & Thể loại (Categories & Genres)
+- **Manga**: Các tác phẩm truyện tranh đến từ Nhật Bản (ví dụ: One Piece).
+- **Manhua**: Các tác phẩm truyện tranh đến từ Trung Quốc với các thể loại Huyền huyễn phương Đông, Kinh dị, Linh dị (ví dụ: Đạo Quỷ Dị Tiên).
+- **Manhwa**: Các tác phẩm truyện tranh dạng cuộn dọc (Webtoon) đến từ Hàn Quốc tập trung vào thể loại hành động nhập vai, hệ thống thăng cấp (ví dụ: Solo Leveling).
+
+## Sơ đồ liên kết chính (Main Sitemap for AI)
+- `/`: Trang chủ - Cập nhật 20 bài review mới nhất.
+- `/blog`: Kho lưu trữ bài viết - Danh sách toàn bộ bài review đã được phân trang.
+- `/about`: Giới thiệu chi tiết - Sứ mệnh, tôn chỉ hoạt động và thông tin liên hệ.
+- `/category/manga`: Các bài viết đánh giá thuộc chuyên mục Manga.
+- `/category/manhua`: Các bài viết đánh giá thuộc chuyên mục Manhua.
+- `/category/manhwa`: Các bài viết đánh giá thuộc chuyên mục Manhwa.
