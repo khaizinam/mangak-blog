@@ -14,10 +14,13 @@ import ThemeToggle from './ThemeToggle.astro';
 		</div>
 
 		<!-- Center: Desktop navigation links (hidden on mobile) -->
-		<div class="hidden md:flex gap-1 lg:gap-2">
-			<HeaderLink href="/">Trang Chủ</HeaderLink>
-			<HeaderLink href="/blog">Bài Review</HeaderLink>
+		<div class="hidden md:flex gap-1 lg:gap-2 items-center">
+			<HeaderLink href="/blog">Bài Viết</HeaderLink>
 			<HeaderLink href="/about">Giới Thiệu</HeaderLink>
+			<HeaderLink href="/category/manga/">Manga</HeaderLink>
+			<HeaderLink href="/category/manhua/">Manhua</HeaderLink>
+			<HeaderLink href="/category/manhwa/">Manhwa</HeaderLink>
+			<HeaderLink href="/category/news/">Tin Tức</HeaderLink>
 		</div>
 
 		<!-- Right side: Desktop theme toggle (hidden on mobile) -->
@@ -59,8 +62,12 @@ import ThemeToggle from './ThemeToggle.astro';
 			<!-- Navigation links in Drawer -->
 			<nav class="flex flex-col gap-3">
 				<HeaderLink href="/">Trang Chủ</HeaderLink>
-				<HeaderLink href="/blog">Bài Review</HeaderLink>
+				<HeaderLink href="/blog">Bài Viết</HeaderLink>
 				<HeaderLink href="/about">Giới Thiệu</HeaderLink>
+				<HeaderLink href="/category/manga/">Manga</HeaderLink>
+				<HeaderLink href="/category/manhua/">Manhua</HeaderLink>
+				<HeaderLink href="/category/manhwa/">Manhwa</HeaderLink>
+				<HeaderLink href="/category/news/">Tin Tức</HeaderLink>
 			</nav>
 		</div>
 
