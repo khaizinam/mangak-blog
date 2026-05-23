@@ -144,7 +144,7 @@ const relatedPosts = sortedPosts
 					</div>
 				</div>
 
-				<div class="post-content text-text-secondary leading-relaxed text-lg [&_h2]:text-text-primary [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:font-title [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-text-primary [&_h3]:mt-10 [&_h3]:mb-4 [&_h3]:font-title [&_h3]:text-xl [&_h3]:font-bold [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-2 [&_strong]:text-text-primary [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:bg-card-bg [&_blockquote]:px-6 [&_blockquote]:py-4 [&_blockquote]:rounded-r-lg [&_blockquote]:my-6 [&_blockquote]:italic [&_blockquote]:text-text-primary [&_a]:underline [&_a]:font-semibold [&_a]:text-accent hover:[&_a]:text-accent-hover [&_table]:w-full [&_table]:my-6 [&_table]:border-collapse [&_table]:border [&_table]:border-border-color [&_th]:bg-bg-secondary [&_th]:border [&_th]:border-border-color [&_th]:px-4 [&_th]:py-2.5 [&_th]:text-left [&_th]:font-bold [&_th]:text-text-primary [&_td]:border [&_td]:border-border-color [&_td]:px-4 [&_td]:py-2.5 [&_td]:text-text-secondary [&_tr:nth-child(even)]:bg-bg-primary/30 font-body">
+				<div class="post-content text-text-secondary leading-relaxed text-lg [&_h2]:text-text-primary [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:font-title [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-text-primary [&_h3]:mt-10 [&_h3]:mb-4 [&_h3]:font-title [&_h3]:text-xl [&_h3]:font-bold [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-2 [&_strong]:text-text-primary [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:bg-card-bg [&_blockquote]:px-6 [&_blockquote]:py-4 [&_blockquote]:rounded-r-lg [&_blockquote]:my-6 [&_blockquote]:italic [&_blockquote]:text-text-primary [&_a]:underline [&_a]:font-semibold [&_a]:text-accent hover:[&_a]:text-accent-hover font-body">
 					<slot />
 				</div>
 
@@ -241,6 +241,63 @@ const relatedPosts = sortedPosts
 				color: var(--text-muted);
 				margin-top: -1.5rem;
 				margin-bottom: 2rem;
+			}
+
+			/* Table styling for responsive mobile scroll and sizes */
+			.post-content :global(table) {
+				display: block;
+				width: 100%;
+				max-width: 100%;
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+				border-collapse: collapse;
+				margin: 2rem 0;
+				border: 1px solid var(--border-color);
+				font-size: 13px; /* Mobile font size */
+			}
+			
+			@media (min-width: 640px) {
+				.post-content :global(table) {
+					display: table;
+					font-size: 0.95rem; /* Desktop font size */
+				}
+			}
+			
+			.post-content :global(th) {
+				background-color: var(--bg-secondary);
+				border: 1px solid var(--border-color);
+				padding: 0.5rem 0.75rem; /* Mobile padding */
+				text-align: left;
+				font-weight: 700;
+				color: var(--text-primary);
+				white-space: nowrap; /* Prevent heading wrapping on mobile */
+			}
+			
+			@media (min-width: 640px) {
+				.post-content :global(th) {
+					padding: 0.75rem 1rem; /* Desktop padding */
+					white-space: normal;
+				}
+			}
+			
+			.post-content :global(td) {
+				border: 1px solid var(--border-color);
+				padding: 0.5rem 0.75rem; /* Mobile padding */
+				color: var(--text-secondary);
+			}
+			
+			@media (min-width: 640px) {
+				.post-content :global(td) {
+					padding: 0.75rem 1rem; /* Desktop padding */
+				}
+			}
+			
+			.post-content :global(tr:nth-child(even)) {
+				background-color: rgba(15, 23, 42, 0.02);
+			}
+			
+			:global(html[data-theme="dark"]) .post-content :global(tr:nth-child(even)) {
+				background-color: rgba(255, 255, 255, 0.03);
 			}
 		</style>
 	</body>
