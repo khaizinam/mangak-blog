@@ -4,6 +4,7 @@ description: "kingdom - vương giả thiên hạ - bộ truyện tranh số 1 v
 pubDate: "2026-05-23 15:00:00"
 categories: ["manga"]
 author: "Tèo Văn Trần"
+ogImage: "https://cdn.mangak.io.vn/blog/kingdom1.jpg"
 ---
 
 ## Tại sao Kingdom - Vương giả thiên hạ lại là bộ manga số 1 hiện nay tại Việt Nam?
