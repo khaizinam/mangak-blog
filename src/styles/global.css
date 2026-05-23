@@ -7,6 +7,9 @@
 	
 	--color-bg-primary: var(--bg-primary);
 	--color-bg-secondary: var(--bg-secondary);
+	--color-card-bg: var(--card-bg);
+	--color-header-bg: var(--header-bg);
+	--color-footer-bg: var(--footer-bg);
 	--color-text-primary: var(--text-primary);
 	--color-text-secondary: var(--text-secondary);
 	--color-text-muted: var(--text-muted);

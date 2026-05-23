@@ -1,8 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
 import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 
@@ -54,10 +54,10 @@ const sortedPosts = posts.sort(
 			<div class="absolute bottom-0 left-0 right-0 h-[60px] sm:h-[100px] bg-gradient-to-t from-bg-primary to-transparent pointer-events-none"></div>
 		</div>
 
-		<main class="pt-12 pb-20 px-6 max-w-[1200px] mx-auto">
+		<main class="pt-12 pb-8 md:pb-16 px-2 md:px-6 max-w-[1200px] mx-auto">
 			<!-- Recent reviews section -->
 			<section>
-				<div class="mb-10 border-l-4 border-accent pl-4 flex justify-between items-center">
+				<div class="mb-6 md:mb-10 border-l-4 border-accent px-4 flex justify-between items-center">
 					<h2 class="text-2xl sm:text-3xl font-extrabold font-title text-text-primary">Bài Viết Mới</h2>
 					<a href="/blog" class="font-semibold font-title text-[0.95rem] text-accent hover:text-accent-hover transition-colors" title="Xem tất cả các bài review truyện tranh mới nhất">Xem tất cả &rarr;</a>
 				</div>
@@ -65,33 +65,7 @@ const sortedPosts = posts.sort(
 				<div class="flex flex-col gap-6 max-w-[800px] mx-auto">
 					{
 						sortedPosts.map((post) => (
-							<a href={`/blog/${post.id}/`} class="no-underline text-inherit block group" title={`Đọc bài review chi tiết: ${post.data.title}`}>
-								<article class="bg-card-bg border border-border-color rounded-xl p-6 sm:p-7 shadow-card-shadow flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg">
-									<div class="flex items-center justify-between mb-3 text-[0.8rem] font-semibold font-title">
-										<div class="flex gap-2">
-											{post.data.categories.map((cat) => (
-												<span class={`uppercase tracking-wider text-${cat.toLowerCase()}`}>
-													{cat}
-												</span>
-											))}
-										</div>
-										<div class="flex items-center gap-2 text-text-muted">
-											<span class="text-text-primary font-medium">{post.data.author}</span>
-											<span class="text-border-color">•</span>
-											<span class="text-text-muted">
-												<FormattedDate date={post.data.pubDate} />
-											</span>
-										</div>
-									</div>
-									
-									<h3 class="text-[1.3rem] sm:text-[1.4rem] font-bold mb-2 leading-snug text-text-primary group-hover:text-accent transition-colors duration-200 font-title">
-										{post.data.title}
-									</h3>
-									<p class="text-[0.95rem] text-text-secondary leading-relaxed font-body">
-										{post.data.description}
-									</p>
-								</article>
-							</a>
+							<BlogPostCard post={post} />
 						))
 					}
 				</div>

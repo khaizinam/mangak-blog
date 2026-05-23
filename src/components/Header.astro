@@ -6,20 +6,126 @@ import ThemeToggle from './ThemeToggle.astro';
 
 <header class="sticky top-0 z-50 w-full border-b border-border-color bg-header-bg/85 backdrop-blur-md transition-all duration-300 px-6">
 	<nav class="max-w-[1200px] mx-auto flex items-center justify-between h-18">
+		<!-- Left side: Logo -->
 		<div class="flex items-center gap-2">
 			<a href="/" class="no-underline flex items-center" title="Trang chủ MangaK - Chuyên trang review truyện tranh" aria-label="Trang chủ MangaK">
 				<img src="/logo.png" alt="MangaK Logo - Kênh review truyện tranh Manga, Manhua, Manhwa" class="h-9 w-auto block" />
 			</a>
 		</div>
-		<div class="flex gap-1 sm:gap-2">
+
+		<!-- Center: Desktop navigation links (hidden on mobile) -->
+		<div class="hidden md:flex gap-1 lg:gap-2">
 			<HeaderLink href="/">Trang Chủ</HeaderLink>
 			<HeaderLink href="/blog">Bài Review</HeaderLink>
 			<HeaderLink href="/about">Giới Thiệu</HeaderLink>
 			<HeaderLink href="/robots.txt" target="_blank" rel="noopener noreferrer" title="Xem robots.txt">Robots</HeaderLink>
 			<HeaderLink href="/llms.txt" target="_blank" rel="noopener noreferrer" title="Xem llms.txt dành cho AI">LLMs</HeaderLink>
 		</div>
-		<div class="flex items-center gap-4">
+
+		<!-- Right side: Desktop theme toggle (hidden on mobile) -->
+		<div class="hidden md:flex items-center gap-4">
 			<ThemeToggle />
+		</div>
+
+		<!-- Mobile Menu Trigger (visible on mobile) -->
+		<div class="flex md:hidden items-center gap-3">
+			<button id="mobile-menu-open" class="p-2 -mr-2 text-text-primary hover:text-accent rounded-lg focus:outline-none transition-colors" aria-label="Mở menu điều hướng">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+				</svg>
+			</button>
 		</div>
 	</nav>
 </header>
+
+<!-- Mobile Sidebar / Drawer (Overlay Backdrop & Slide-in content) - Placed as sibling of header to avoid backdrop-filter rendering bugs -->
+<div id="mobile-sidebar" class="fixed inset-0 z-[9999] invisible transition-all duration-300 md:hidden">
+	<!-- Backdrop overlay -->
+	<div id="mobile-sidebar-backdrop" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300 backdrop-blur-sm z-[9998]"></div>
+
+	<!-- Drawer Content -->
+	<div id="mobile-sidebar-content" class="absolute right-0 top-0 bottom-0 w-[280px] max-w-[80%] border-l border-border-color shadow-2xl translate-x-full transition-transform duration-300 flex flex-col justify-between p-4 z-[9999]" style="background-color: var(--bg-secondary);">
+		<div>
+			<!-- Top Bar in Drawer -->
+			<div class="flex items-center justify-between mb-8 pb-4 border-b border-border-color/60">
+				<a href="/" class="no-underline flex items-center" aria-label="Trang chủ MangaK">
+					<img src="/logo.png" alt="MangaK Logo" class="h-8 w-auto block" />
+				</a>
+				<button id="mobile-menu-close" class="p-2 -mr-2 text-text-secondary hover:text-accent rounded-lg focus:outline-none transition-colors" aria-label="Đóng menu điều hướng">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+			</div>
+
+			<!-- Navigation links in Drawer -->
+			<nav class="flex flex-col gap-3">
+				<HeaderLink href="/">Trang Chủ</HeaderLink>
+				<HeaderLink href="/blog">Bài Review</HeaderLink>
+				<HeaderLink href="/about">Giới Thiệu</HeaderLink>
+				<HeaderLink href="/robots.txt" target="_blank" rel="noopener noreferrer" title="Xem robots.txt">Robots</HeaderLink>
+				<HeaderLink href="/llms.txt" target="_blank" rel="noopener noreferrer" title="Xem llms.txt dành cho AI">LLMs</HeaderLink>
+			</nav>
+		</div>
+
+		<!-- Bottom section in Drawer: Theme Toggle & Info -->
+		<div class="border-t border-border-color/60 pt-6">
+			<div class="flex items-center justify-between">
+				<span class="text-sm font-semibold font-title text-text-secondary">Chế độ giao diện</span>
+				<ThemeToggle />
+			</div>
+			<p class="text-[10px] text-text-muted mt-6 text-center font-body">
+				MangaK Blog © {new Date().getFullYear()}
+			</p>
+		</div>
+	</div>
+</div>
+
+<script is:inline>
+	// Manage mobile menu open/close state
+	document.addEventListener('DOMContentLoaded', () => {
+		const openBtn = document.getElementById('mobile-menu-open');
+		const closeBtn = document.getElementById('mobile-menu-close');
+		const sidebar = document.getElementById('mobile-sidebar');
+		const backdrop = document.getElementById('mobile-sidebar-backdrop');
+		const content = document.getElementById('mobile-sidebar-content');
+
+		function openMenu() {
+			if (!sidebar) return;
+			sidebar.classList.remove('invisible');
+			// Allow layout calculation then animate
+			requestAnimationFrame(() => {
+				if (backdrop) {
+					backdrop.classList.remove('opacity-0');
+					backdrop.classList.add('opacity-100');
+				}
+				if (content) {
+					content.classList.remove('translate-x-full');
+					content.classList.add('translate-x-0');
+				}
+			});
+			document.body.style.overflow = 'hidden'; // lock scroll
+		}
+
+		function closeMenu() {
+			if (backdrop) {
+				backdrop.classList.remove('opacity-100');
+				backdrop.classList.add('opacity-0');
+			}
+			if (content) {
+				content.classList.remove('translate-x-0');
+				content.classList.add('translate-x-full');
+			}
+
+			// Hide overlay completely after transition duration
+			setTimeout(() => {
+				if (sidebar) sidebar.classList.add('invisible');
+			}, 300);
+			document.body.style.overflow = ''; // unlock scroll
+		}
+
+		if (openBtn) openBtn.addEventListener('click', openMenu);
+		if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+		if (backdrop) backdrop.addEventListener('click', closeMenu);
+	});
+</script>
