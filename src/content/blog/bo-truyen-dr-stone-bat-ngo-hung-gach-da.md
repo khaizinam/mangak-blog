@@ -4,6 +4,7 @@ description: "Dù từng khiến người xem trầm trồ khi tái thiết cả
 pubDate: "2026-05-24 01:00:00"
 categories: ["manga"]
 author: "Bảo Lâm"
+ogImage: "https://cdn.mangak.io.vn/blog/drstone-hoi-sinh-the-gioi-thumb.jpg"
 ---
 
 ## Bộ truyện Dr. STONE bất ngờ hứng gạch đá dù tái thiết cả nền văn minh
@@ -12,7 +13,7 @@ Dù từng khiến người xem trầm trồ khi tái thiết cả nền văn mi
 
 Cốt truyện chính của siêu phẩm [Dr. STONE](https://mangak.site/story/drstone-hoi-sinh-the-gioi) từ lâu đã thu hút hàng triệu khán giả nhờ hành trình tái thiết nền văn minh nhân loại từ con số không bằng sức mạnh tuyệt đối của khoa học. Xuyên suốt bộ truyện, thiên tài Senku cùng các đồng đội đã khiến người xem trầm trồ khi chế tạo thành công từ thuốc kháng sinh, điện thoại di động cho đến cả tên lửa vũ trụ bằng những nguồn lực thô sơ nhất của Thế giới Đá.
 
-![Dr.Stone - Hồi Sinh Thế Giới](https://img.otruyenapi.com/uploads/comics/drstone-hoi-sinh-the-gioi-thumb.jpg)
+![Dr.Stone - Hồi Sinh Thế Giới](https://cdn.mangak.io.vn/blog/drstone-hoi-sinh-the-gioi-thumb.jpg)
 
 Tuy nhiên, một cuộc tranh luận kỳ lạ mới đây trên các diễn đàn Nhật Bản đã nổ ra, nhắm vào một chi tiết sinh học cực kỳ cụ thể. Tại sao bộ truyện không bao giờ phát minh ra sản phẩm vệ sinh phụ nữ?
 
