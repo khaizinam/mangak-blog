@@ -123,6 +123,14 @@ body {
 	margin-bottom: 2rem;
 }
 
+/* Horizontal rule styling */
+.post-content hr {
+	margin: 2rem 0;
+	padding: 0;
+	border: none;
+	border-top: 1px solid var(--border-color);
+}
+
 /* Table styling for responsive mobile scroll and sizes */
 .post-content table {
 	display: block;
