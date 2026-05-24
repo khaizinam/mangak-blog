@@ -102,6 +102,8 @@ Câu chuyện không chỉ đơn thuần là một cuộc phiêu lưu mà còn m
 
 > Nếu bạn đang tìm kiếm một bộ truyện vừa hài hước vừa có chiều sâu, **"Ta Có Một Sơn Trại"** chắc chắn không làm bạn thất vọng.
 
+Đặc biệt, truyện đã chính thức hoàn thành. Xem thêm bài viết: [Hồi kết trọn vẹn của Ta Có Một Sơn Trại sau 5 năm](/blog/ket-thuc-ta-co-mot-son-trai).
+
 ---
 
 Đọc truyện tại [Ta Có Một Sơn Trại | MangaK](https://mangak.site/story/ta-co-mot-son-trai)

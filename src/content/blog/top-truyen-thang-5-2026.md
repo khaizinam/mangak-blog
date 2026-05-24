@@ -21,7 +21,7 @@ Trình Đại Lôi là sinh viên đại học bình thường, trong lúc đang
 
 Đại Lôi mang theo hệ thống "Sơn tặc chi tâm", từ đây trở thành đương gia của Cáp Mô Trại. Cậu bắt đầu hoàn thành nhiệm vụ, thu thập nhân tài và binh mã, biến nơi đây thành khu vực hùng mạnh, tranh bá cùng thiên hạ. Hệ thống mang hình dáng con người có phần sáng tạo, màn trò chuyện của hai người đầy hài hước.
 
-Xem thêm [Review Truyện Tranh: Ta Có Một Sơn Trại](/blog/review-ta-co-mot-son-trai)
+Xem thêm [Review Truyện Tranh: Ta Có Một Sơn Trại](/blog/review-ta-co-mot-son-trai) và [Hồi kết trọn vẹn của Ta Có Một Sơn Trại sau 5 năm](/blog/ket-thuc-ta-co-mot-son-trai)
 
 Đọc truyện tại [Ta Có Một Sơn Trại | MangaK](https://mangak.site/story/ta-co-mot-son-trai)
 
