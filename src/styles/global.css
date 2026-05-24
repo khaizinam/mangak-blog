@@ -179,3 +179,60 @@ body {
 html[data-theme="dark"] .post-content tr:nth-child(even) {
 	background-color: rgba(255, 255, 255, 0.03);
 }
+
+/* ==========================================================================
+   Pagefind UI Styles
+   ========================================================================== */
+:root {
+	--pagefind-ui-scale: 1;
+	--pagefind-ui-primary: var(--accent);
+	--pagefind-ui-text: var(--text-primary);
+	--pagefind-ui-background: var(--bg-primary);
+	--pagefind-ui-border: var(--border-color);
+	--pagefind-ui-tag: var(--bg-secondary);
+	--pagefind-ui-border-width: 1px;
+	--pagefind-ui-border-radius: 0.5rem;
+	--pagefind-ui-image-border-radius: 0.5rem;
+	--pagefind-ui-image-box-ratio: 3 / 2;
+	--pagefind-ui-font: var(--font-body);
+}
+
+.pagefind-ui__search-input {
+	background-color: var(--input-bg) !important;
+	color: var(--text-primary) !important;
+	font-weight: 500 !important;
+}
+
+.pagefind-ui__result-excerpt {
+	color: var(--text-secondary) !important;
+}
+
+.pagefind-ui__button {
+	background-color: var(--bg-secondary) !important;
+}
+
+.pagefind-ui__drawer {
+	color: var(--text-secondary) !important;
+}
+
+.pagefind-ui__result-title {
+	font-family: var(--font-title) !important;
+	font-weight: 700 !important;
+}
+
+.pagefind-ui__result-link {
+	color: var(--text-primary) !important;
+	transition: color 0.2s ease;
+}
+
+.pagefind-ui__result-link:hover {
+	color: var(--accent) !important;
+}
+
+.pagefind-ui__mark {
+	background-color: rgba(244, 63, 94, 0.2) !important;
+	color: var(--accent) !important;
+	font-weight: 700;
+	padding: 0 0.125rem;
+	border-radius: 0.25rem;
+}

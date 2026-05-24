@@ -1,0 +1,53 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="vi">
+	<head>
+		<BaseHead title="Tìm kiếm | MangaK" description="Tìm kiếm bài viết truyện tranh trên MangaK" />
+        <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+	</head>
+	<body>
+		<Header />
+		<main class="pt-12 pb-8 md:pb-16 px-2 md:px-6 max-w-[800px] mx-auto min-h-[60vh]">
+            <div class="mb-6 md:mb-10 border-l-4 border-accent px-4 flex justify-between items-center">
+                <h1 class="text-2xl sm:text-3xl font-extrabold font-title text-text-primary">Tìm kiếm</h1>
+            </div>
+            
+            <div id="search" class="w-full mt-8"></div>
+		</main>
+		<Footer />
+
+        <script src="/pagefind/pagefind-ui.js" is:inline></script>
+        <script is:inline>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                if (typeof PagefindUI !== 'undefined') {
+                    new PagefindUI({ 
+                        element: "#search", 
+                        showSubResults: true,
+                        showImages: true,
+                        translations: {
+                            placeholder: "Tìm kiếm bài viết...",
+                            clear_search: "Xóa",
+                            load_more: "Tải thêm kết quả",
+                            search_label: "Tìm kiếm",
+                            filters_label: "Bộ lọc",
+                            zero_results: "Không tìm thấy kết quả nào cho [SEARCH_TERM]",
+                            many_results: "[COUNT] kết quả được tìm thấy cho [SEARCH_TERM]",
+                            one_result: "[COUNT] kết quả được tìm thấy cho [SEARCH_TERM]",
+                            alt_search: "Không tìm thấy kết quả nào cho [SEARCH_TERM]. Hiển thị kết quả cho [DIFFERENT_TERM] thay thế",
+                            search_suggestion: "Không tìm thấy kết quả nào cho [SEARCH_TERM]. Bạn có muốn tìm kiếm [DIFFERENT_TERM] thay thế?",
+                            searching: "Đang tìm kiếm [SEARCH_TERM]..."
+                        }
+                    });
+                } else {
+                    document.getElementById('search').innerHTML = '<p class="text-text-muted italic">Tính năng tìm kiếm đang được khởi tạo hoặc chỉ hoạt động trên môi trường production.</p>';
+                }
+            });
+        </script>
+	</body>
+</html>
