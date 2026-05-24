@@ -151,24 +151,50 @@ const relatedPosts = sortedPosts
 
 				<ShareButtons title={title} description={description} />
 
-				<div class="mt-10">
-					<script src="https://giscus.app/client.js"
-							is:inline
-							data-repo="khaizinam/mangak-blog"
-							data-repo-id="R_kgDOSlYvUQ"
-							data-category="General"
-							data-category-id="DIC_kwDOSlYvUc4C9tjK"
-							data-mapping="pathname"
-							data-strict="0"
-							data-reactions-enabled="1"
-							data-emit-metadata="0"
-							data-input-position="bottom"
-							data-theme="preferred_color_scheme"
-							data-lang="vi"
-							crossorigin="anonymous"
-							async>
-					</script>
+				<div class="mt-10" id="giscus-container">
 				</div>
+				<script is:inline>
+					(function() {
+						const container = document.getElementById('giscus-container');
+						if (!container) return;
+
+						const currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+						const script = document.createElement('script');
+						script.src = 'https://giscus.app/client.js';
+						script.setAttribute('data-repo', 'khaizinam/mangak-blog');
+						script.setAttribute('data-repo-id', 'R_kgDOSlYvUQ');
+						script.setAttribute('data-category', 'General');
+						script.setAttribute('data-category-id', 'DIC_kwDOSlYvUc4C9tjK');
+						script.setAttribute('data-mapping', 'pathname');
+						script.setAttribute('data-strict', '0');
+						script.setAttribute('data-reactions-enabled', '1');
+						script.setAttribute('data-emit-metadata', '0');
+						script.setAttribute('data-input-position', 'bottom');
+						script.setAttribute('data-theme', currentTheme);
+						script.setAttribute('data-lang', 'vi');
+						script.setAttribute('crossorigin', 'anonymous');
+						script.async = true;
+						
+						container.appendChild(script);
+
+						const observer = new MutationObserver((mutations) => {
+							mutations.forEach((mutation) => {
+								if (mutation.attributeName === 'data-theme') {
+									const newTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+									const iframe = document.querySelector('iframe.giscus-frame');
+									if (iframe) {
+										iframe.contentWindow.postMessage(
+											{ giscus: { setConfig: { theme: newTheme } } },
+											'https://giscus.app'
+										);
+									}
+								}
+							});
+						});
+
+						observer.observe(document.documentElement, { attributes: true });
+					})();
+				</script>
 
 				<!-- Navigation: Prev & Next Posts -->
 				{(prevPost || nextPost) && (
