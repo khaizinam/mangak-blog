@@ -5,7 +5,6 @@ import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import { SITE_TITLE } from '../consts';
-import { Font } from 'astro:assets';
 
 interface Props {
 	title: string;
@@ -53,8 +52,6 @@ const ogImageUrl = resolvedImageUrl.startsWith('http')
 	const isDark = getThemePreference() === 'dark';
 	document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
 </script>
-
-<Font cssVariable="--font-atkinson" preload />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
