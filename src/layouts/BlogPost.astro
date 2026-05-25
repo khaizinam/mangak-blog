@@ -111,10 +111,10 @@ const relatedPosts = sortedPosts
 				</nav>
 
 				<div class="mb-12 text-start border-b border-border-color pb-8">
-					<h1 class="text-xl sm:text-2xl md:text-3xl font-black text-text-primary leading-tight mb-5 font-title">
+					<h1 class="text-lg sm:text-xl md:text-2xl font-black text-text-primary leading-tight mb-5 font-title">
 						{title}
 					</h1>
-					<div class="text-[0.95rem] text-text-muted font-title font-medium flex flex-col items-start gap-2">
+					<div class="text-[0.8rem] text-text-muted font-title font-medium flex flex-col items-start gap-2">
 						<!-- Row 1: Author & Publish Date -->
 						<div class="flex flex-wrap items-center justify-center gap-2">
 							<span>Tác giả: <strong class="text-text-primary font-bold">{author}</strong></span>
@@ -145,7 +145,7 @@ const relatedPosts = sortedPosts
 					</div>
 				</div>
 
-				<div class="post-content text-text-secondary leading-relaxed text-lg [&_h2]:text-text-primary [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:font-title [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:text-text-primary [&_h3]:mt-10 [&_h3]:mb-4 [&_h3]:font-title [&_h3]:text-xl [&_h3]:font-bold [&_p]:mb-6 [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_li]:mb-2 [&_strong]:text-text-primary [&_blockquote]:border-l-4 [&_blockquote]:border-accent [&_blockquote]:bg-card-bg [&_blockquote]:px-6 [&_blockquote]:py-4 [&_blockquote]:rounded-r-lg [&_blockquote]:my-6 [&_blockquote]:italic [&_blockquote]:text-text-primary [&_a]:underline [&_a]:font-semibold [&_a]:text-accent hover:[&_a]:text-accent-hover font-body">
+				<div class="post-content">
 					<slot />
 				</div>
 
