@@ -27,3 +27,4 @@ yarn.lock
 
 # generated pagefind index
 public/pagefind/
+.*
