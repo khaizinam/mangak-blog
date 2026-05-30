@@ -1,5 +1,5 @@
 ---
-title: "HOA KỲ CHÍNH THỨC KHỞI XƯỚNG ĐIỀU TRA VIỆT NAM"
+title: "Hoa Kỳ chính thức khởi xướng điều tra Việt nam"
 description: "Rạng sáng nay 30/09/2026 theo giờ Việt Nam, Đại diện Thương mại Hoa Kỳ đã công bố một thông tin cực kỳ bất lợi với Việt Nam."
 pubDate: "2026-05-30 01:00:00"
 categories: ["News"]
