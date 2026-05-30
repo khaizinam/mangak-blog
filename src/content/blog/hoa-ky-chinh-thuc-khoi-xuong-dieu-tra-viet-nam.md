@@ -11,6 +11,8 @@ ogImage: "https://cdn.mangak.io.vn/blog/hoa-ky-chinh-thuc-dieu-tra-viet-nam.jpg"
 
 Rạng sáng nay 30/09/2026 theo giờ Việt Nam, Đại diện Thương mại Hoa Kỳ đã công bố một thông tin cực kỳ bất lợi với Việt Nam. Cơ quan này cho biết đánh giá cao Việt Nam khi đã có những cải thiện trong xử lý vấn đề vi phạm bản quyền. Nhưng cơ quan này vẫn quyết định khởi động một cuộc điều tra, nhằm đưa ra các hình thức áp thuế đến sản phẩm, hàng hóa Việt Nam. Việt Nam là quốc gia duy nhất bị điều tra liên quan đến vấn đề bản quyền và sở hữu trí tuệ. 
 
+![HOA KỲ CHÍNH THỨC KHỞI XƯỚNG ĐIỀU TRA VIỆT NAM](https://cdn.mangak.io.vn/blog/hoa-ky-chinh-thuc-dieu-tra-viet-nam.jpg)
+
 Tập trung ở các vấn đề như sau:
 
 1. **Vi phạm bản quyền trực tuyến:** Việt Nam bị coi là nguồn cung cấp vi phạm bản quyền trực tuyến lớn trên toàn cầu, lưu trữ nhiều trang web vi phạm tiếng Anh nhắm đến khán giả quốc tế. Các hình phạt hiện tại bị đánh giá là chưa đủ sức răn đe.
