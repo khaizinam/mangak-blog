@@ -5,6 +5,7 @@ import BaseHead from '../../../components/BaseHead.astro';
 import BlogPostCard from '../../../components/BlogPostCard.astro';
 import Footer from '../../../components/Footer.astro';
 import Header from '../../../components/Header.astro';
+import { DEFAULT_OG_IMAGE } from '../../../consts';
 
 export const getStaticPaths = (async ({ paginate }) => {
 	const posts = await getCollection('blog');
@@ -34,7 +35,7 @@ const categoryTitle = category.toUpperCase();
 <!doctype html>
 <html lang="vi">
 	<head>
-		<BaseHead title={`Chuyên Mục ${categoryTitle} - Trang ${page.currentPage} - MangaK`} description={`Danh sách các bài viết review, đánh giá truyện tranh thuộc thể loại ${categoryTitle} trên MangaK.`} />
+		<BaseHead title={`Chuyên Mục ${categoryTitle} - Trang ${page.currentPage} - MangaK`} description={`Danh sách các bài viết review, đánh giá truyện tranh thuộc thể loại ${categoryTitle} trên MangaK.`} image={DEFAULT_OG_IMAGE} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "BreadcrumbList",

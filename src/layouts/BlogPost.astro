@@ -12,6 +12,9 @@ interface Props extends CollectionEntry<'blog'>['data'] {
 
 const { id, title, description, pubDate, updatedDate, categories = [], author, ogImage } = Astro.props;
 
+const FALLBACK_IMAGE = 'https://cdn.khaizinam.io.vn/blog-folder/2026-05/og-banner.jpg';
+const heroImg = ogImage || FALLBACK_IMAGE;
+
 // Fetch all posts to determine related, prev and next posts
 const allPosts = await getCollection('blog');
 
@@ -98,6 +101,8 @@ const relatedPosts = sortedPosts
 	</head>
 
 	<body>
+		<!-- Reading progress bar -->
+		<div id="reading-progress"></div>
 		<Header />
 		<main>
 			<article class="w-full max-w-[800px] mx-auto py-4 md:py-10 px-4">
@@ -110,39 +115,53 @@ const relatedPosts = sortedPosts
 					<span class="text-text-primary font-semibold line-clamp-1">{title}</span>
 				</nav>
 
-				<div class="mb-12 text-start border-b border-border-color pb-8">
-					<h1 class="text-lg sm:text-xl md:text-2xl font-black text-text-primary leading-tight mb-5 font-title">
+				<div class="mb-8 text-start">
+					<h1 class="text-xl sm:text-2xl md:text-3xl font-black text-text-primary leading-tight mb-4 font-title">
 						{title}
 					</h1>
-					<div class="text-[0.8rem] text-text-muted font-title font-medium flex flex-col items-start gap-2">
-						<!-- Row 1: Author & Publish Date -->
-						<div class="flex flex-wrap items-center justify-center gap-2">
-							<span>Tác giả: <strong class="text-text-primary font-bold">{author}</strong></span>
-							<span>•</span>
-							<span>Viết ngày <FormattedDate date={pubDate} /></span>
-							{updatedDate && (
-								<>
-									<span>•</span>
-									<span>Cập nhật ngày <FormattedDate date={updatedDate} /></span>
-								</>
-							)}
-						</div>
-						
-						<!-- Row 2: Categories -->
+
+					<!-- Meta: Author, Date, Categories -->
+					<div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.8rem] text-text-muted font-medium mb-5">
+						<!-- Categories -->
 						{categories && categories.length > 0 && (
-							<div class="flex flex-wrap items-center justify-center gap-1.5 mt-0.5">
-								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-								</svg>
-								<span>Thể loại:</span>
-								<div class="flex flex-wrap items-center gap-1">
-									{categories.map((cat, idx) => (
-										<Fragment key={cat}><a href={`/category/${cat.toLowerCase()}/`} class="hover:text-accent underline transition-colors">{cat}</a>{idx < categories.length - 1 && <span>,&nbsp;</span>}</Fragment>
-									))}
-								</div>
+							<div class="flex flex-wrap gap-1.5">
+								{categories.map((cat) => {
+									const key = cat.toLowerCase();
+									const cls = ['manga','manhua','manhwa','news'].includes(key) ? `cat-badge-${key}` : 'cat-badge-default';
+									return (
+										<a
+											href={`/category/${key}/`}
+											class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider no-underline transition-opacity hover:opacity-80 ${cls}`}
+										>
+											{cat}
+										</a>
+									);
+								})}
 							</div>
 						)}
+
+						<span class="text-border-color">•</span>
+						<span>Tác giả: <strong class="text-text-primary font-bold">{author}</strong></span>
+						<span class="text-border-color">•</span>
+						<span><FormattedDate date={pubDate} /></span>
+						{updatedDate && (
+							<>
+								<span class="text-border-color">•</span>
+								<span>Cập nhật: <FormattedDate date={updatedDate} /></span>
+							</>
+						)}
 					</div>
+
+					<!-- Hero image (always shown, fallback to banner if no ogImage) -->
+					<div class="w-full rounded-xl overflow-hidden border border-border-color mb-8 shadow-card-shadow">
+						<img
+							src={heroImg}
+							alt={`Ảnh bìa bài viết: ${title}`}
+							class="w-full h-auto object-cover max-h-[420px]"
+							loading="eager"
+						/>
+					</div>
+					<div class="border-b border-border-color mb-8"></div>
 				</div>
 
 				<div class="post-content">
@@ -266,6 +285,19 @@ const relatedPosts = sortedPosts
 						link.setAttribute('rel', 'noopener noreferrer');
 					}
 				});
+
+				// Reading progress bar
+				const bar = document.getElementById('reading-progress');
+				if (bar) {
+					const updateProgress = () => {
+						const scrollTop = window.scrollY;
+						const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+						const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+						bar.style.width = Math.min(progress, 100) + '%';
+					};
+					window.addEventListener('scroll', updateProgress, { passive: true });
+					updateProgress();
+				}
 			});
 		</script>
 		<script>

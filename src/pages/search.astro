@@ -2,13 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { DEFAULT_OG_IMAGE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="vi">
 	<head>
-		<BaseHead title="Tìm kiếm | MangaK" description="Tìm kiếm bài viết truyện tranh trên MangaK" />
+		<BaseHead title="Tìm kiếm | MangaK" description="Tìm kiếm bài viết truyện tranh trên MangaK" image={DEFAULT_OG_IMAGE} />
         <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
 	</head>
 	<body>

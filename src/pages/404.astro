@@ -2,12 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import { DEFAULT_OG_IMAGE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="vi">
 	<head>
-		<BaseHead title="404 - Không Tìm Thấy Trang | MangaK" description="Trang bạn tìm kiếm không tồn tại hoặc đã bị thay đổi trên MangaK." />
+		<BaseHead title="404 - Không Tìm Thấy Trang | MangaK" description="Trang bạn tìm kiếm không tồn tại hoặc đã bị thay đổi trên MangaK." image={DEFAULT_OG_IMAGE} />
 		<script is:inline>
 			// Instant client-side redirect for old story pages to the reading domain
 			const path = window.location.pathname;

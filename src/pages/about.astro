@@ -2,12 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import { DEFAULT_OG_IMAGE } from '../consts';
 ---
 
 <!doctype html>
 <html lang="vi">
 	<head>
-		<BaseHead title="Giới Thiệu Về MangaK - Cổng Đánh Giá Truyện Tranh" description="MangaK là blog cá nhân tự tổng hợp thông tin, chia sẻ đánh giá truyện tranh Manga, Manhua, Manhwa phi lợi nhuận, đồng thời kết nối độc giả đến các website dịch truyện uy tín." />
+		<BaseHead title="Giới Thiệu Về MangaK - Cổng Đánh Giá Truyện Tranh" description="MangaK là blog cá nhân tự tổng hợp thông tin, chia sẻ đánh giá truyện tranh Manga, Manhua, Manhwa phi lợi nhuận, đồng thời kết nối độc giả đến các website dịch truyện uy tín." image={DEFAULT_OG_IMAGE} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify({
 			"@context": "https://schema.org",
 			"@type": "BreadcrumbList",

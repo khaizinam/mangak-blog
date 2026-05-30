@@ -2,41 +2,82 @@
 const today = new Date();
 ---
 
-<footer class="bg-footer-bg border-t border-border-color py-10 px-6 text-text-secondary transition-all duration-300">
-	<div class="max-w-[1200px] mx-auto flex flex-col gap-4">
-		<!-- Top Row: Logo & Description -->
-		<div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
-			<div class="flex items-center">
-				<img src="/logo.png" alt="MangaK Logo - Kênh review truyện tranh Manga, Manhua, Manhwa" class="h-10 w-auto block" />
+<footer class="bg-footer-bg border-t border-border-color pt-10 pb-6 px-6 transition-all duration-300">
+	<div class="max-w-[1200px] mx-auto">
+		<!-- Top: Logo + Description + Nav columns -->
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+			<!-- Brand column -->
+			<div class="sm:col-span-2 lg:col-span-1">
+				<a href="/" class="no-underline" title="Trang chủ MangaK">
+					<img src="/logo.png" alt="MangaK Logo - Kênh review truyện tranh Manga, Manhua, Manhwa" class="h-10 w-auto block mb-3" />
+				</a>
+				<p class="text-sm text-text-muted leading-relaxed font-body max-w-[280px]">
+					Review và cập nhật tin tức mới nhất về truyện tranh Manga, Manhua, Manhwa.
+				</p>
 			</div>
-			<p class="max-w-[500px] text-center md:text-right text-[0.95rem] text-text-muted leading-relaxed font-body">
-				Review và cập nhật tin tức mới nhất về truyện tranh Manga, Manhua, Manhwa.
-			</p>
+
+			<!-- Danh mục -->
+			<div>
+				<h3 class="text-sm font-bold text-text-primary mb-4 uppercase tracking-wider font-title">Danh mục</h3>
+				<ul class="flex flex-col gap-2.5 text-sm text-text-muted font-body">
+					<li><a href="/blog" class="hover:text-accent transition-colors no-underline" title="Tất cả bài viết">Tất cả bài viết</a></li>
+					<li><a href="/category/manga/" class="hover:text-accent transition-colors no-underline" title="Review Manga Nhật Bản">Manga</a></li>
+					<li><a href="/category/manhua/" class="hover:text-accent transition-colors no-underline" title="Review Manhua Trung Quốc">Manhua</a></li>
+					<li><a href="/category/manhwa/" class="hover:text-accent transition-colors no-underline" title="Review Manhwa Hàn Quốc">Manhwa</a></li>
+					<li><a href="/category/news/" class="hover:text-accent transition-colors no-underline" title="Tin tức truyện tranh">Tin Tức</a></li>
+				</ul>
+			</div>
+
+			<!-- Khám phá -->
+			<div>
+				<h3 class="text-sm font-bold text-text-primary mb-4 uppercase tracking-wider font-title">Khám phá</h3>
+				<ul class="flex flex-col gap-2.5 text-sm text-text-muted font-body">
+					<li><a href="/about" class="hover:text-accent transition-colors no-underline" title="Giới thiệu MangaK">Giới thiệu</a></li>
+					<li><a href="/search" class="hover:text-accent transition-colors no-underline" title="Tìm kiếm bài viết">Tìm kiếm</a></li>
+					<li><a href="/rss.xml" class="hover:text-accent transition-colors no-underline" title="RSS Feed MangaK">RSS Feed</a></li>
+					<li><a href="/llms.txt" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline" title="LLMs.txt">LLMs.txt</a></li>
+					<li><a href="/robots.txt" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline" title="robots.txt">Robots.txt</a></li>
+				</ul>
+			</div>
+
+			<!-- Liên kết -->
+			<div>
+				<h3 class="text-sm font-bold text-text-primary mb-4 uppercase tracking-wider font-title">Liên kết</h3>
+				<ul class="flex flex-col gap-2.5 text-sm text-text-muted font-body">
+					<li>
+						<a href="https://www.facebook.com/mangakfreevn/" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline inline-flex items-center gap-2" title="Fanpage Facebook MangaK">
+							<svg class="h-4 w-4 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+							Facebook
+						</a>
+					</li>
+					<li>
+						<a href="https://mangak.site" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline inline-flex items-center gap-2" title="MangaK - Đọc truyện miễn phí">
+							<svg class="h-4 w-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+							Đọc truyện miễn phí
+						</a>
+					</li>
+					<li>
+						<a href="https://teamsohoa.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline" title="Team Số Hoá">Team Số Hoá</a>
+					</li>
+					<li>
+						<a href="https://xuhuong24.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline" title="Xu Hướng 24">Xu Hướng 24</a>
+					</li>
+					<li>
+						<a href="https://khaizinam.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors no-underline" title="Khaizinam Blog">Khaizinam Blog</a>
+					</li>
+				</ul>
+			</div>
 		</div>
 
 		<!-- Divider -->
-		<hr class="border-0 border-t border-border-color" />
+		<hr class="border-0 border-t border-border-color mb-5" />
 
-		<!-- Partner Links -->
-		<div class="flex flex-wrap justify-center gap-x-3 gap-y-1 text-[11px] text-text-muted pb-2">
-			<a href="https://teamsohoa.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="Team Số Hoá">Team Số Hoá</a>
-			<span>|</span>
-			<a href="https://xuhuong24.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="Xu Hướng 24">Xu Hướng 24</a>
-			<span>|</span>
-			<a href="https://mangak.site" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="MangaK - Truyện tranh miễn phí">MangaK - Truyện tranh miễn phí</a>
-			<span>|</span>
-			<a href="https://khaizinam.com" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="Khaizinam - Blog">Khaizinam - Blog</a>
-			<span>|</span>
-			<a href="https://www.facebook.com/mangakfreevn/" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="Fanpage Facebook MangaK">Fanpage Facebook</a>
-			<span>|</span>
-			<a href="/robots.txt" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="robots.txt">robots.txt</a>
-			<span>|</span>
-			<a href="/llms.txt" target="_blank" rel="noopener noreferrer" class="hover:text-accent transition-colors duration-150" title="llms.txt dành cho AI">llms.txt</a>
-		</div>
-
-		<!-- Bottom Row: Copyright & Disclaimer -->
-		<div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[0.85rem] text-text-muted font-body">
+		<!-- Bottom: Copyright -->
+		<div class="flex flex-col sm:flex-row justify-between items-center gap-3 text-[0.8rem] text-text-muted font-body">
 			<p>&copy; {today.getFullYear()} MangaK. All rights reserved.</p>
+			<p class="text-center text-[11px]">
+				Review truyện tranh <span style="color: var(--color-manga);">Manga</span> · <span style="color: var(--color-manhua);">Manhua</span> · <span style="color: var(--color-manhwa);">Manhwa</span>
+			</p>
 		</div>
 	</div>
 </footer>

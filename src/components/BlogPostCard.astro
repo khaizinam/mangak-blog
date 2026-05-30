@@ -10,37 +10,72 @@ interface Props {
 			pubDate: Date;
 			categories: string[];
 			author: string;
+			ogImage?: string;
 		};
 	};
 }
 
 const { post } = Astro.props;
+
+const fallbackImage = 'https://cdn.khaizinam.io.vn/blog-folder/2026-05/og-banner.jpg';
+const thumb = post.data.ogImage || fallbackImage;
+
+// Map category to static class (Tailwind-safe)
+function getCatBadgeClass(cat: string): string {
+	const key = cat.toLowerCase();
+	if (['manga', 'manhua', 'manhwa', 'news'].includes(key)) return `cat-badge-${key}`;
+	return 'cat-badge-default';
+}
 ---
 
 <a href={`/blog/${post.id}/`} class="no-underline text-inherit block group" title={`Đọc bài review chi tiết: ${post.data.title}`}>
-	<article class="bg-card-bg border border-border-color rounded-xl p-4 md:p-6 sm:p-7 shadow-card-shadow flex flex-col transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg">
-		<div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-3 text-[14px] md:text-[18px] font-semibold font-title">
-			<div class="flex flex-wrap gap-x-2 gap-y-1">
-				{post.data.categories.map((cat) => (
-					<span class={`uppercase tracking-wider text-${cat.toLowerCase()}`}>
-						{cat}
-					</span>
-				))}
-			</div>
-			<div class="flex items-center gap-2 text-text-muted">
-				<span class="text-text-primary font-medium">{post.data.author}</span>
-				<span class="text-border-color">•</span>
-				<span class="text-text-muted">
+	<article class="bg-card-bg border border-border-color rounded-xl overflow-hidden shadow-card-shadow flex flex-row transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-lg">
+		<!-- Thumbnail -->
+		<div class="shrink-0 w-[120px] sm:w-[160px] md:w-[200px] relative overflow-hidden">
+			<img
+				src={thumb}
+				alt={`Ảnh bìa bài viết: ${post.data.title}`}
+				class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
+
+		<!-- Content -->
+		<div class="flex flex-col justify-between p-3 sm:p-4 md:p-5 flex-1 min-w-0">
+			<!-- Top row: categories + date -->
+			<div class="flex flex-wrap items-center justify-between gap-x-3 gap-y-1.5 mb-2">
+				<!-- Category badges -->
+				<div class="flex flex-wrap gap-1.5">
+					{post.data.categories.map((cat) => (
+						<span class={`inline-flex items-center px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider ${getCatBadgeClass(cat)}`}>
+							{cat}
+						</span>
+					))}
+				</div>
+				<!-- Date -->
+				<span class="text-[11px] text-text-muted shrink-0">
 					<FormattedDate date={post.data.pubDate} />
 				</span>
 			</div>
+
+			<!-- Title -->
+			<h3 class="text-sm sm:text-base md:text-[1.05rem] font-bold mb-1.5 leading-snug text-text-primary group-hover:text-accent transition-colors duration-200 font-title line-clamp-2">
+				{post.data.title}
+			</h3>
+
+			<!-- Description -->
+			<p class="text-xs sm:text-sm text-text-secondary leading-relaxed font-body line-clamp-2 mb-2">
+				{post.data.description}
+			</p>
+
+			<!-- Author -->
+			<div class="flex items-center gap-1.5 text-[11px] text-text-muted mt-auto pt-2 border-t border-border-color/50">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+				</svg>
+				<span class="font-medium text-text-primary">{post.data.author}</span>
+			</div>
 		</div>
-		
-		<h3 class="text-[14px] md:text-[18px] font-bold mb-2 leading-snug text-text-primary group-hover:text-accent transition-colors duration-200 font-title">
-			{post.data.title}
-		</h3>
-		<p class="text-[12px] md:text-[16px] text-text-secondary leading-relaxed font-body line-clamp-2">
-			{post.data.description}
-		</p>
 	</article>
 </a>

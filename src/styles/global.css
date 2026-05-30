@@ -78,8 +78,38 @@ html[data-theme="dark"] {
 
 /* Base style resets using Tailwind variables */
 html {
-	font-size: 19px;
+	font-size: 16px;
 }
+
+/* ==========================================================================
+   Reading Progress Bar
+   ========================================================================== */
+#reading-progress {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 0%;
+	height: 3px;
+	background: var(--accent-gradient);
+	z-index: 9999;
+	transition: width 0.1s linear;
+	border-radius: 0 2px 2px 0;
+}
+
+/* ==========================================================================
+   Category color utilities (static to prevent Tailwind purge)
+   ========================================================================== */
+.cat-color-manga  { color: var(--color-manga); }
+.cat-color-manhua { color: var(--color-manhua); }
+.cat-color-manhwa { color: var(--color-manhwa); }
+.cat-color-news   { color: var(--accent); }
+.cat-color-default { color: var(--accent); }
+
+.cat-badge-manga  { color: var(--color-manga);  background-color: var(--color-manga-bg); }
+.cat-badge-manhua { color: var(--color-manhua); background-color: var(--color-manhua-bg); }
+.cat-badge-manhwa { color: var(--color-manhwa); background-color: var(--color-manhwa-bg); }
+.cat-badge-news   { color: var(--accent);       background-color: rgba(244,63,94,0.1); }
+.cat-badge-default { color: var(--accent);      background-color: rgba(244,63,94,0.1); }
 
 body {
 	font-family: var(--font-body);

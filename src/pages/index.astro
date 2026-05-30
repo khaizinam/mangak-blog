@@ -9,7 +9,18 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 const posts = await getCollection('blog');
 const sortedPosts = posts.sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-).slice(0, 20); // Display top 20 posts on the home page as well
+).slice(0, 20);
+
+// Category filter options
+const categories = [
+	{ label: 'Tất cả', value: '' },
+	{ label: 'Manga', value: 'manga' },
+	{ label: 'Manhua', value: 'manhua' },
+	{ label: 'Manhwa', value: 'manhwa' },
+	{ label: 'Tin Tức', value: 'news' },
+];
+
+const fallbackHero = 'https://cdn.khaizinam.io.vn/blog-folder/2026-05/og-banner.jpg';
 ---
 
 <!doctype html>
@@ -46,31 +57,139 @@ const sortedPosts = posts.sort(
 	</head>
 	<body>
 		<Header />
-		
-		<div 
-			class="w-full h-[200px] sm:h-[300px] md:h-[350px] lg:h-[400px] border-b border-border-color bg-cover bg-center relative"
-			style="background-image: url('https://cdn.khaizinam.io.vn/blog-folder/2026-05/og-banner.jpg');"
+
+		<!-- ===================== HERO BANNER ===================== -->
+		<div
+			class="w-full h-[280px] sm:h-[360px] md:h-[420px] lg:h-[480px] border-b border-border-color bg-cover bg-center relative overflow-hidden"
+			style={`background-image: url('${fallbackHero}');`}
 		>
-			<div class="absolute bottom-0 left-0 right-0 h-[60px] sm:h-[100px] bg-gradient-to-t from-bg-primary to-transparent pointer-events-none"></div>
+			<!-- Base dark overlay (full cover) -->
+			<div class="absolute inset-0 bg-black/55"></div>
+			<!-- Directional gradient for depth -->
+			<div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/20 to-transparent"></div>
+			<!-- Bottom fade to page bg -->
+			<div class="absolute bottom-0 left-0 right-0 h-[80px] sm:h-[120px] bg-gradient-to-t from-bg-primary to-transparent pointer-events-none"></div>
+
+			<!-- Hero text content -->
+			<div class="relative z-10 h-full flex flex-col justify-center px-6 md:px-10 max-w-[1200px] mx-auto">
+				<div class="max-w-[560px]">
+					<p class="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-white/70 mb-2 sm:mb-3">
+						Blog Review Truyện Tranh
+					</p>
+					<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight mb-3 sm:mb-4 drop-shadow-lg">
+						Review <span style="color: var(--accent);">Manga, Manhua</span><br />& Manhwa chi tiết
+					</h1>
+					<p class="text-sm sm:text-base text-white/80 leading-relaxed mb-5 sm:mb-7 max-w-[420px]">
+						Đánh giá khách quan, chuyên sâu các bộ truyện tranh hot nhất từ Nhật, Trung, Hàn.
+					</p>
+					<div class="flex flex-wrap items-center gap-3">
+						<a
+							href="/blog"
+							class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm text-white no-underline transition-all duration-200 hover:opacity-90 hover:-translate-y-0.5 shadow-lg"
+							style="background: var(--accent-gradient);"
+							title="Xem tất cả bài review truyện tranh"
+						>
+							Xem tất cả bài viết
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+							</svg>
+						</a>
+						<a
+							href="/search"
+							class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-bold text-sm text-white no-underline border border-white/40 backdrop-blur-sm bg-white/10 hover:bg-white/20 transition-all duration-200 hover:-translate-y-0.5"
+							title="Tìm kiếm truyện tranh"
+						>
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+							</svg>
+							Tìm kiếm
+						</a>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<main class="pt-12 pb-8 md:pb-16 px-2 md:px-6 max-w-[1200px] mx-auto">
-			<!-- Recent reviews section -->
+		<main class="pt-10 pb-8 md:pb-16 px-2 md:px-6 max-w-[1200px] mx-auto">
+			<!-- ===================== CATEGORY FILTER BAR ===================== -->
+			<div class="flex flex-wrap items-center gap-2 mb-8 max-w-[800px] mx-auto" id="category-filter-bar">
+				{categories.map((cat) => (
+					<button
+						class="cat-filter-btn px-4 py-1.5 rounded-full text-sm font-semibold border border-border-color text-text-secondary transition-all duration-200 hover:border-accent hover:text-accent cursor-pointer bg-transparent"
+						data-category={cat.value}
+						aria-label={`Lọc bài viết theo ${cat.label}`}
+					>
+						{cat.label}
+					</button>
+				))}
+			</div>
+
+			<!-- ===================== RECENT REVIEWS ===================== -->
 			<section>
-				<div class="mb-6 md:mb-10 border-l-4 border-accent px-4 flex justify-between items-center">
+				<div class="mb-6 md:mb-8 border-l-4 border-accent px-4 flex justify-between items-center max-w-[800px] mx-auto">
 					<h2 class="text-2xl sm:text-3xl font-extrabold font-title text-text-primary">Bài Viết Mới</h2>
 					<a href="/blog" class="font-semibold font-title text-[0.95rem] text-accent hover:text-accent-hover transition-colors" title="Xem tất cả các bài review truyện tranh mới nhất">Xem tất cả &rarr;</a>
 				</div>
 
-				<div class="flex flex-col gap-6 max-w-[800px] mx-auto">
+				<div class="flex flex-col gap-5 max-w-[800px] mx-auto" id="posts-list">
 					{
 						sortedPosts.map((post) => (
-							<BlogPostCard post={post} />
+							<div
+								class="post-item"
+								data-categories={post.data.categories.map(c => c.toLowerCase()).join(',')}
+							>
+								<BlogPostCard post={post} />
+							</div>
 						))
 					}
 				</div>
 			</section>
 		</main>
 		<Footer />
+
+		<!-- Category filter script -->
+		<script is:inline>
+			document.addEventListener('DOMContentLoaded', () => {
+				const buttons = document.querySelectorAll('.cat-filter-btn');
+				const items = document.querySelectorAll('.post-item');
+				let active = '';
+
+				function setActive(btn) {
+					buttons.forEach(b => {
+						b.classList.remove('active-cat-btn');
+						b.style.removeProperty('background');
+						b.style.removeProperty('color');
+						b.style.removeProperty('border-color');
+					});
+					btn.classList.add('active-cat-btn');
+					btn.style.background = 'var(--accent-gradient)';
+					btn.style.color = '#fff';
+					btn.style.borderColor = 'transparent';
+				}
+
+				function filterPosts(category) {
+					items.forEach(item => {
+						if (!category) {
+							item.style.display = '';
+						} else {
+							const cats = item.getAttribute('data-categories') || '';
+							item.style.display = cats.split(',').includes(category) ? '' : 'none';
+						}
+					});
+				}
+
+				buttons.forEach(btn => {
+					btn.addEventListener('click', () => {
+						const cat = btn.getAttribute('data-category');
+						active = cat;
+						setActive(btn);
+						filterPosts(cat);
+					});
+				});
+
+				// Set "Tất cả" as default active
+				const firstBtn = buttons[0];
+				if (firstBtn) setActive(firstBtn);
+			});
+		</script>
 	</body>
 </html>
