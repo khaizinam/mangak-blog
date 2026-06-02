@@ -1,5 +1,5 @@
 ---
-title: "NetTruyen – Từ Huyền Thoại Đến 100 Domain Giả Mạo"
+title: "NetTruyen Là Gì? Lịch Sử Từ Ngày Ra Đời Đến Khi Bị Chặn Và 100 Domain Giả Mạo"
 description: "lịch sử nettruyen - từ ngày ra đời 2014 đến khi bị chặn toàn quốc 2022, drama bản quyền lezhin comics, viettel vnpt chặn domain, và hàng trăm web giả mạo nổi lên như nấm sau mưa - câu chuyện về trang đọc truyện tranh lớn nhất việt nam một thập kỷ tồn tại giữa vòng vây tường lửa"
 pubDate: "2026-06-02 10:00:00"
 categories: ["manga"]
